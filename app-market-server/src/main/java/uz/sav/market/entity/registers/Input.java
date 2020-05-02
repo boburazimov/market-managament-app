@@ -1,6 +1,7 @@
 package uz.sav.market.entity.registers;
 
 import uz.sav.market.entity.catalogs.MBalance;
+import uz.sav.market.entity.catalogs.PayType;
 import uz.sav.market.entity.template.AbsEntity;
 
 import javax.persistence.Column;
@@ -17,5 +18,7 @@ public class Input extends AbsEntity {
     @Column(length = 12, nullable = false)
     private Double ClearDateUzs;
 
+    @ManyToOne
+    private PayType payType;
 
 }
