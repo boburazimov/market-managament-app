@@ -22,4 +22,5 @@ public class Currency {
     @Column(nullable = false, unique = true)
     private String symbolCode;
 
+    private String extraInfo;
 }

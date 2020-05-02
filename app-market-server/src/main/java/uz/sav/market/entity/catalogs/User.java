@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import uz.sav.market.entity.enums.StatusEnum;
 import uz.sav.market.entity.template.AbsEntity;
 
 import javax.persistence.*;
@@ -34,6 +35,9 @@ public class User extends AbsEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private StatusEnum statusEnum;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "user_id")},
@@ -45,12 +49,13 @@ public class User extends AbsEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    public User(String firstName, String lastName, String phoneNumber, String email, String password, List<Role> roles) {
+    public User(String firstName, String lastName, String phoneNumber, String email, String password, StatusEnum statusEnum, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+        this.statusEnum = statusEnum;
         this.roles = roles;
     }
 

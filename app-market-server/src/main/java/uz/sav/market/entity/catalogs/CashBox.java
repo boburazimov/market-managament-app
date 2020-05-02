@@ -22,4 +22,6 @@ public class CashBox extends AbsEntity {
 
     @ManyToOne(optional = false)
     private Currency currency;
+
+    private String extraInfo;
 }

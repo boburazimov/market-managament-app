@@ -37,5 +37,4 @@ public abstract class AbsEntity {
 
     @LastModifiedBy
     private UUID updatedBy;
-
 }
