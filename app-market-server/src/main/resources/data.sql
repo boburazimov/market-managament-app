@@ -1,0 +1,1 @@
+insert into role(name) values ('ROLE_USER'), ('ROLE_CASHIER'), ('ROLE_ADMIN'), ('ROLE_DIRECTOR');
