@@ -35,6 +35,7 @@ public class JwtTokenProvider {
     }
 
     public String getUserIdFromJWT(String token) {
+        System.out.println(token);
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-market-client/app-market-client.iml" filepath="$PROJECT_DIR$/app-market-client/app-market-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/app-market-server/app-market-server.iml" filepath="$PROJECT_DIR$/app-market-server/app-market-server.iml" />
     </modules>
   </component>
