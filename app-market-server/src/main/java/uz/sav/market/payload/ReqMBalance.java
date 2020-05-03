@@ -14,8 +14,6 @@ public class ReqMBalance {
 
     private UUID id;
 
-    private List<UUID> magazinesId;
-
     private Double balance;
 
     private String extraInfo;

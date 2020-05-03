@@ -8,6 +8,7 @@ import uz.sav.market.entity.template.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -15,6 +16,15 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Entity
 public class CashDesk extends AbsEntity {
+
+    @Column(unique = true, nullable = false)
+    private String externalCode;
+
+    @ManyToOne(optional = false)
+    private Magazine magazine;
+
+    @ManyToOne(optional = false)
+    private MBalance balance;
 
     @Column(nullable = false, unique = true)
     private String name;

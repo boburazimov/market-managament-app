@@ -9,6 +9,6 @@ import uz.sav.market.repository.rest.projection.CustomCashDesk;
 import java.util.UUID;
 
 @CrossOrigin
-@RepositoryRestResource(path = "/cashDesk", collectionResourceRel = "list", excerptProjection = CustomCashDesk.class)
+@RepositoryRestResource(path = "cashDesk", collectionResourceRel = "list", excerptProjection = CustomCashDesk.class)
 public interface CashDeskRepository extends JpaRepository<CashDesk, UUID> {
 }

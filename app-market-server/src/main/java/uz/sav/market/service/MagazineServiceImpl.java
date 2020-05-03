@@ -1,10 +1,14 @@
 package uz.sav.market.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import uz.sav.market.entity.catalogs.Magazine;
 import uz.sav.market.entity.catalogs.User;
+import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqMagazine;
 import uz.sav.market.payload.ResMagazine;
@@ -12,8 +16,10 @@ import uz.sav.market.payload.ResPageable;
 import uz.sav.market.repository.MBalanceRepository;
 import uz.sav.market.repository.MagazineRepository;
 import uz.sav.market.repository.UserRepository;
+import uz.sav.market.utils.CommonUtils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MagazineServiceImpl implements MagazineService {
@@ -31,10 +37,9 @@ public class MagazineServiceImpl implements MagazineService {
             Magazine magazine = new Magazine();
             if (request.getId() != null)
                 magazine = magazineRepository.findById(request.getId()).orElseThrow(() -> new ResourceNotFoundException("getMagazine"));
+            magazine.setExternalCode(request.getExternalCode());
             magazine.setName(request.getName());
-            magazine.setSoftCode(request.getSoftCode());
             magazine.setUser(userRepository.findById(request.getUserId()).orElseThrow(() -> new ResourceNotFoundException("getUser")));
-            magazine.setBalance(balanceRepository.findById(request.getBalanceId()).orElseThrow(() -> new ResourceNotFoundException("getMBalance")));
             magazine.setExtraInfo(request.getExtraInfo());
             magazineRepository.save(magazine);
             return new ApiResponse(request.getId() == null ? "Magazine saved!" : "Magazine edited!", true);
@@ -45,16 +50,39 @@ public class MagazineServiceImpl implements MagazineService {
 
     @Override
     public ResMagazine getMagazine(Magazine magazine) {
-        return null;
+
+        return new ResMagazine(
+                magazine.getId(),
+                magazine.getExternalCode(),
+                magazine.getName(),
+                magazine.getUser().getId(),
+                magazine.getUser().getPhoneNumber(),
+                magazine.getExtraInfo()
+        );
     }
 
     @Override
-    public ResPageable getMagazines(int page, int size) {
-        return null;
+    public ResPageable getMagazines(int page, int size) throws BadRequestException {
+
+        CommonUtils.getPageable(page, size);
+        PageRequest pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
+        Page<Magazine> magazinePage = magazineRepository.findAll(pageable);
+        return new ResPageable(
+                magazinePage.getTotalPages(),
+                magazinePage.getTotalElements(),
+                page,
+                magazinePage.getContent().stream().map(this::getMagazine).collect(Collectors.toList()));
     }
 
     @Override
     public ApiResponse deleteMagazine(UUID id) {
-        return null;
+
+        try {
+            Magazine magazine = magazineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("getMagazine"));
+            magazineRepository.deleteById(magazine.getId());
+            return new ApiResponse("Magazine deleted!", true);
+        } catch (Exception e) {
+            return new ApiResponse(e.getMessage(), false);
+        }
     }
 }

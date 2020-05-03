@@ -19,16 +19,13 @@ import javax.persistence.OneToOne;
 public class Magazine extends AbsEntity {
 
     @Column(unique = true, nullable = false)
-    private String name;
+    private String externalCode;
 
     @Column(unique = true, nullable = false)
-    private Long softCode;
-
-    @OneToOne(optional = false)
-    private User user;
+    private String name;
 
     @ManyToOne(optional = false)
-    private MBalance balance;
+    private User user;
 
     private String extraInfo;
 }

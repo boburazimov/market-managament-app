@@ -8,7 +8,11 @@ import java.util.UUID;
 @Projection(name = "customCurrency", types = Currency.class)
 public interface CustomCurrency {
 
-    UUID getId();
+    Integer getId();
 
-    String getName();
+    String getFullName();
+
+    String getSymbolCode();
+
+    String getExtraInfo();
 }

@@ -94,12 +94,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/csrf",
                         "/webjars/**")
                 .permitAll()
-                .antMatchers("/api/auth/register", "/api/auth/login")
+                .antMatchers("/api/auth/register", "/api/auth/login", "/api/*")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/language")
-                .permitAll()
-                .antMatchers("/api/**")
-                .authenticated();
+                .permitAll();
+//                .antMatchers("/api/**")
+//                .authenticated();
 
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

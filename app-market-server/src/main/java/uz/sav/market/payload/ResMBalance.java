@@ -13,10 +13,6 @@ public class ResMBalance {
 
     private UUID id;
 
-    private UUID magazineId;
-
-    private String magazineName;
-
     private Double balance;
 
     private String extraInfo;

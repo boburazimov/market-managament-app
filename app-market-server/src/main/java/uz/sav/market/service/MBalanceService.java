@@ -2,6 +2,7 @@ package uz.sav.market.service;
 
 import uz.sav.market.entity.catalogs.MBalance;
 import uz.sav.market.entity.catalogs.User;
+import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqMBalance;
 import uz.sav.market.payload.ResMBalance;
@@ -15,7 +16,7 @@ public interface MBalanceService {
 
     ResMBalance getMBalance(MBalance balance);
 
-    ResPageable getMBalances(int page, int size);
+    ResPageable getMBalances(int page, int size) throws BadRequestException;
 
     ApiResponse deleteMBalance(UUID id);
 }

@@ -13,13 +13,11 @@ public class ReqMagazine {
 
     private UUID id;
 
+    private String externalCode;
+
     private String name;
 
-    private Long softCode;
-
     private UUID userId;
-
-    private UUID balanceId;
 
     private String extraInfo;
 }

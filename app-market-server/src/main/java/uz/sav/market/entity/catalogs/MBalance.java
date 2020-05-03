@@ -8,8 +8,6 @@ import uz.sav.market.entity.template.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -18,10 +16,7 @@ import java.util.List;
 @Entity
 public class MBalance extends AbsEntity {
 
-    @OneToMany(mappedBy = "balance")
-    private List<Magazine> magazines;
-
-    @Column(nullable = false, length = 8)
+    @Column(unique = true, nullable = false, length = 8)
     private Double balance;
 
     private String extraInfo;

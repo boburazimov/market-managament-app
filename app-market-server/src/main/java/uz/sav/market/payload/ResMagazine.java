@@ -13,17 +13,13 @@ public class ResMagazine {
 
     private UUID id;
 
-    private String name;
+    private String externalCode;
 
-    private Long softCode;
+    private String name;
 
     private UUID userId;
 
-    private String userName;
-
-    private UUID balanceId;
-
-    private Double balance;
+    private String phoneNumber;
 
     private String extraInfo;
 }

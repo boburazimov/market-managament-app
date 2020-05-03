@@ -17,7 +17,7 @@ public class Currency {
     private Integer id;
 
     @Column(nullable = false, unique = true)
-    private String mainName;
+    private String fullName;
 
     @Column(nullable = false, unique = true)
     private String symbolCode;

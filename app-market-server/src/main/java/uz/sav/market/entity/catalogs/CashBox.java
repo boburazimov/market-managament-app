@@ -20,6 +20,9 @@ public class CashBox extends AbsEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(unique = true, nullable = false)
+    private String externalCode;
+
     @ManyToOne(optional = false)
     private Currency currency;
 

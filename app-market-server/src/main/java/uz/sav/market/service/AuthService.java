@@ -32,6 +32,7 @@ public class AuthService implements UserDetailsService {
             if (!exists) {
 
                 User user = new User(
+                        request.getExternalCode(),
                         request.getFirstName(),
                         request.getLastName(),
                         request.getPhoneNumber(),

@@ -11,4 +11,6 @@ public interface CustomCashDesk {
     UUID getId();
 
     String getName();
+
+    String getBalance();
 }

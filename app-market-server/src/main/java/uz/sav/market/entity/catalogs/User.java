@@ -20,6 +20,9 @@ import java.util.List;
 @Entity(name = "users")
 public class User extends AbsEntity implements UserDetails {
 
+    @Column(unique = true, nullable = false)
+    private String externalCode;
+
     @Column(nullable = false)
     private String firstName;
 
@@ -49,7 +52,8 @@ public class User extends AbsEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    public User(String firstName, String lastName, String phoneNumber, String email, String password, StatusEnum statusEnum, List<Role> roles) {
+    public User(String externalCode, String firstName, String lastName, String phoneNumber, String email, String password, StatusEnum statusEnum, List<Role> roles) {
+        this.externalCode = externalCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

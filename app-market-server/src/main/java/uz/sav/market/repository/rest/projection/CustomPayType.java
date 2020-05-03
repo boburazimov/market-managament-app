@@ -8,9 +8,5 @@ public interface CustomPayType {
 
     Integer getId();
 
-    String getNameUz();
-
-    String getNameRu();
-
-    String getNameEn();
+    String getName();
 }
