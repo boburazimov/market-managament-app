@@ -1,0 +1,284 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.admin-menu {
+  background-color: #F6F8FC;
+
+  .navbar-nav {
+    .nav-item {
+      margin-left: 30px;
+    }
+  }
+}
+
+.login-page {
+  padding-top: 50px;
+
+
+
+  .card {
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+
+    .enter-login {
+      text-align: center;
+      font-size: 30px;
+      padding-top: 20px;
+      color: #FF5758 !important;
+    }
+
+    .enter-login2 {
+      font-size: 18px;
+      padding-top: 20px;
+    }
+
+    .card-body {
+      .check-input {
+        margin-top: 30px;
+
+        .form-check-input {
+          height: 20px;
+          width: 20px;
+        }
+
+        .drop-input {
+          transition: 1s all ease;
+        }
+
+        p {
+          padding-top: 3px;
+          margin-bottom: 0;
+          font-size: 18px;
+          padding-left: 40px;
+        }
+
+      }
+
+      .form-group {
+
+        p {
+          font-size: 18px;
+          padding-top: 15px;
+        }
+
+        input {
+          padding-left: 20px;
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          &::placeholder {
+            opacity: 0.7;
+          }
+        }
+
+        .enter-button {
+          background-color: #FF5758;
+          border-radius: 2px;
+          color: white;
+          border: none;
+          height: 40px;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    .register {
+      padding-top: 50px;
+      padding-bottom: 20px;
+
+      button {
+        &:focus {
+          box-shadow: none;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  .eyes {
+    img {
+      width: 25px;
+      margin-top: 14px;
+    }
+  }
+}
+
+.catalog {
+  display: flex;
+
+  .layout-children {
+    width: 80%;
+    padding-top: 20px;
+
+    .title {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .addBtn {
+      //background-color: #378FF6;
+      color: #4689ff;
+      display: inline-block;
+      float: right;
+      border-color: #7aaaff;
+    }
+
+    .table {
+      tr {
+        th {
+          background-color: #378FF6;
+          color: #fff;
+          border: 0;
+        }
+
+        td {
+          .btn {
+            padding: 7px;
+            line-height: 100%;
+            text-align: center;
+            float: right;
+            margin-right: 5px;
+          }
+
+          .btn-edite {
+            background-color: #378FF6;
+            color: #fff;
+            border-color: #378FF6;
+          }
+        }
+      }
+    }
+  }
+}
+
+.katalog-sidebar {
+  background-color: #F6F8FC;
+  overflow-y: scroll;
+  width: 20%;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #F6F8FC;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+
+
+  .list-group-item {
+    padding: 0;
+    background-color: #378FF6;
+    border: 0;
+
+    .nav-link {
+      color: #fff;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      transition: 0.4s;
+      background-color: #378FF6;
+      border-radius: 0 !important;
+      padding: 14px;
+
+      &:hover {
+        transition: 0.4s;
+        padding-left: 20px;
+        background-color: #3383e1;
+      }
+
+    }
+
+    .active-catalog {
+      transition: 0.4s;
+      padding-left: 20px;
+      background-color: #3383e1;
+    }
+
+    .inUl {
+      padding-left: 30px;
+
+      &:hover {
+        padding-left: 40px;
+      }
+    }
+  }
+
+
+}
+
+.inputPage {
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    form {
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      .dataPick {
+        .react-datepicker-wrapper{
+          width: 100%;
+        }
+      }
+
+      .table {
+        margin-top: 20px;
+
+        td {
+          padding: 0.35rem;
+          vertical-align: middle;
+
+          .form-group {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .btn-sec{
+      text-align: center;
+      div{
+        text-align: center;
+        padding: 12px 165px;
+        display: inline-block;
+        color: #fff;
+        background-color: #378FF6;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.4s;
+        p{
+          line-height: 100%;
+          margin: 0;
+        }
+        &:hover{
+          transition: 0.4s;
+          background-color: #3383e1;
+        }
+      }
+    }
+    .save-btn{
+      button{
+        text-align: center;
+        padding: 7px 24px;
+        display: inline-block;
+        color: #fff;
+        background-color: red;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.4s;
+       float: right;
+
+      }
+    }
+  }
+}

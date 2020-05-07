@@ -8,8 +8,18 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "availity-reactstrap-validation": "^2.6.1",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "dva": "^2.6.0-beta.6",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.14.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-icons": "^3.10.0",
+    "react-toastify": "^5.5.0",
+    "reactstrap": "^8.4.1",
+    "sass-loader": "^8.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
@@ -26,7 +36,10 @@
     "umi-plugin-react": "^1.8.4"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["eslint --fix", "git add"]
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8.0.0"

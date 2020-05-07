@@ -1,9 +1,11 @@
-import styles from './index.css';
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.css';
+import NavbarPanel from "../component/NavbarPanel";
 
 function BasicLayout(props) {
   return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to umi!</h1>
+    <div>
+      <NavbarPanel/>
       {props.children}
     </div>
   );
