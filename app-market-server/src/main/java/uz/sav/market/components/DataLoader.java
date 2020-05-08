@@ -30,7 +30,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
         if (initMode.equals("always")) {
+
             userRepository.save(new User(
                     "AA-00001",
                     "Bobur",

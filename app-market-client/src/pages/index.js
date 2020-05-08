@@ -1,10 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import useSpinner from "../component/Spinner/useSpinner";
+import {Button} from "reactstrap";
+import axios from "axios";
 
-export default function() {
+export default function () {
+
+  const [spinner, showSpinner, hideSpinner] = useSpinner();
+
+  const fakeFetch = () => {
+    showSpinner();
+    setTimeout(() => hideSpinner(), 3000)
+  };
+
   return (
     <div>
-    <h1>Home Page</h1>
+      <h1>Home Page</h1>
+      <Button onClick={fakeFetch}>Click Me</Button>
+      {spinner}
     </div>
   );
 }
