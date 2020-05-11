@@ -2,7 +2,7 @@ import axios from 'axios'
 import {cloneDeep, isEmpty} from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import qs from 'qs'
-import {STORAGE_NAME} from "./constant";
+import {CANCEL_REQUEST_MESSAGE, STORAGE_NAME} from "./constant";
 
 const {CancelToken} = axios;
 window.cancelRequest = new Map();
@@ -101,11 +101,11 @@ export default function request(options) {
     .catch(error => {
       const {response, message} = error;
 
-      // if (String(message) === CANCEL_REQUEST_MESSAGE) {
-      //   return {
-      //     success: false,
-      //   }
-      // }
+      if (String(message) === CANCEL_REQUEST_MESSAGE) {
+        return {
+          success: false,
+        }
+      }
 
       let msg;
       let statusCode;

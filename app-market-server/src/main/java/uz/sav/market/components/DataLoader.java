@@ -43,6 +43,16 @@ public class DataLoader implements CommandLineRunner {
                     StatusEnum.ACTIVE,
                     roleRepository.findAll()
             ));
+            userRepository.save(new User(
+                    "AA-00002",
+                    "Abdurahim",
+                    "Abidov",
+                    "+998917800110",
+                    "a.abidov@havasfood.uz",
+                    passwordEncoder.encode("321"),
+                    StatusEnum.ACTIVE,
+                    roleRepository.findAll()
+            ));
         }
     }
 }

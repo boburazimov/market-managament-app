@@ -8,15 +8,19 @@ import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ResPageable;
 import uz.sav.market.payload.ResUser;
+import uz.sav.market.repository.UserRepository;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
-
+    UserRepository userRepository;
 
     @Override
     public ResUser getUser(User user) {
@@ -41,5 +45,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public ApiResponse deleteUser(UUID id) {
         return null;
+    }
+
+    @Override
+    public List<ResUser> getUserList() {
+        return userRepository.findAll().stream().map(
+                user -> new ResUser(
+                        user.getId(),
+                        user.getPhoneNumber()
+                )).collect(Collectors.toList());
     }
 }

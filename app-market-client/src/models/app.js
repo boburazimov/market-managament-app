@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import router from "umi/router";
 
 const {
-  userMe, getCurrencies, getStatusEnums,
+  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -15,9 +15,13 @@ export default ({
   namespace: 'app',
 
   state: {
+    pathname: '',
+    showModal: false,
     currentUser: '',
+    magazines: [],
     currencies: [],
     statusEnums: [],
+    users: [],
   },
 
   subscriptions: {
@@ -49,6 +53,52 @@ export default ({
         }
       } catch (e) {
         toast.error(e.message)
+      }
+    },
+
+    * getUsers({payload}, {call, put}) {
+      const res = yield call(getUsers);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            users: res.object
+          }
+        })
+      }
+    },
+
+    * addMagazine({payload}, {call, put}) {
+      const res = yield call(addMagazine, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false
+          }
+        });
+        toast.success(res.message);
+        yield put({type: 'getMagazines'});
+      }
+    },
+
+    * getMagazines({payload}, {call, put}) {
+      const res = yield call(getMagazines);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            magazines: res.object
+          }
+        })
+      }
+    },
+
+    * deleteMagazine({payload}, {call, put}){
+      const res = yield call(deleteMagazine, payload);
+      if (res.success){
+        toast.success(res.message);
+        yield put({type: 'getMagazines'});
       }
     },
 

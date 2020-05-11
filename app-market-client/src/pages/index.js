@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import useSpinner from "../component/Spinner/useSpinner";
 import {Button} from "reactstrap";
-import axios from "axios";
 
 export default function () {
 

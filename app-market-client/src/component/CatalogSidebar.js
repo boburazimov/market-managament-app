@@ -9,10 +9,10 @@ class CatalogSidebar extends Component {
     return (
       <div className="katalog-sidebar">
         <ListGroup>
-          <ListGroupItem>
-            <Link to="/catalog/person"
-                  className={window.location.pathname === "/catalog/person" ? "active-catalog nav-link" : "nav-link"}>Person</Link>
-          </ListGroupItem>
+          {/*<ListGroupItem>*/}
+          {/*  <Link to="/catalog/person"*/}
+          {/*        className={window.location.pathname === "/catalog/person" ? "active-catalog nav-link" : "nav-link"}>Person</Link>*/}
+          {/*</ListGroupItem>*/}
           <ListGroupItem>
             <Link to="/catalog/magazine"
                   className={window.location.pathname === "/catalog/magazine" ? "active-catalog nav-link" : "nav-link"}>Magazine</Link>

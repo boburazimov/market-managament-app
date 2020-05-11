@@ -29,4 +29,9 @@ public class ResUser {
     private StatusEnum statusEnum;
 
     private List<Role> roles;
+
+    public ResUser(UUID id, String phoneNumber) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+    }
 }

@@ -52,7 +52,7 @@ class NavbarPanel extends Component {
                   <NavLink href="/instruction/">Yo'riqnoma</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/catalog/person">Catalog</NavLink>
+                  <NavLink href="/catalog/magazine">Catalog</NavLink>
                 </NavItem>
               </Nav>
               <Nav className="ml-auto" navbar>

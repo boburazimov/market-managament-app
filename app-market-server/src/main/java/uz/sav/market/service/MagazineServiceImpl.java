@@ -33,6 +33,7 @@ public class MagazineServiceImpl implements MagazineService {
 
     @Override
     public ApiResponse addMagazine(ReqMagazine request, User user) {
+
         try {
             Magazine magazine = new Magazine();
             if (request.getId() != null)

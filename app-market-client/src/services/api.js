@@ -1,8 +1,12 @@
 export default {
 
-  getCurrencies: '/currency',
-  getCurrency: '/currency',
+  addMagazine: 'POST /magazine',
+  getMagazines: '/magazine',
+  deleteMagazine: 'DELETE /magazine',
+
   addCurrency: 'POST /currency',
+  getCurrency: '/currency',
+  getCurrencies: '/currency',
   editCurrency: 'PATCH /currency',
   deleteCurrency: 'DELETE /currency',
 
@@ -14,5 +18,6 @@ export default {
 
   userMe: '/user/userMe',
   getStatusEnums: '/status',
+  getUsers: '/user/list',
 
 }
