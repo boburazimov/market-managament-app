@@ -20,7 +20,7 @@ import uz.sav.market.utils.AppConstants;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path = "/api/mbalance")
+@RequestMapping(path = "/api/balance")
 public class MBalanceController {
 
     @Autowired

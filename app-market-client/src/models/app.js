@@ -3,7 +3,8 @@ import {toast} from "react-toastify";
 import router from "umi/router";
 
 const {
-  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine
+  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
+  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance,
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -22,6 +23,8 @@ export default ({
     currencies: [],
     statusEnums: [],
     users: [],
+    balances: [],
+
   },
 
   subscriptions: {
@@ -94,11 +97,34 @@ export default ({
       }
     },
 
-    * deleteMagazine({payload}, {call, put}){
+    * deleteMagazine({payload}, {call, put}) {
       const res = yield call(deleteMagazine, payload);
-      if (res.success){
-        toast.success(res.message);
+      if (res.success) {
+        toast.success('Маркет удален!');
         yield put({type: 'getMagazines'});
+      } else {
+        toast.success('Ошибка при удалении!');
+        yield put({type: 'getMagazines'});
+      }
+    },
+
+    * addCurrency({payload}, {call, put}) {
+      const res = yield call(addCurrency, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false
+          }
+        });
+        if (payload.id) {
+          toast.success("Валюта изменена");
+        } else {
+          toast.success("Добавлено валюта");
+        }
+        yield put({type: "getCurrencies"})
+      } else {
+        toast.error(res.message)
       }
     },
 
@@ -108,10 +134,66 @@ export default ({
         yield put({
           type: 'updateState',
           payload: {
-            currencies: res._embedded.currencies
+            currencies: res._embedded.currency
           }
         })
       }
+    },
+
+    * deleteCurrency({payload}, {call, put}) {
+      const res = yield call(deleteCurrency, payload);
+      if (res.success) {
+        toast.success('Валюта удалена!');
+        yield put({type: 'getCurrencies'});
+      } else {
+        toast.success('Ошибка при удалении!');
+        yield put({type: 'getCurrencies'});
+      }
+    },
+
+    * addBalance({payload}, {call, put}) {
+      // payload.balance = payload.balance.replace(/\s+/g, '');
+      const res = yield call(addBalance, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false
+          }
+        });
+        if (payload.id) {
+          toast.success("Баланс изменен");
+        } else {
+          toast.success("Баланс добавлен");
+        }
+        yield put({type: "getBalances"})
+      } else {
+        toast.error(res.message)
+      }
+    },
+
+    * getBalances({payload}, {call, put}) {
+      const res = yield call(getBalances);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            balances: res.object
+          }
+        })
+      }
+    },
+
+    * deleteBalance({payload}, {call, put}) {
+      const res = yield call(deleteBalance, payload);
+      if (res.success) {
+        toast.success('Баланс удален!');
+        yield put({type: 'getBalances'});
+      } else {
+        toast.success('Ошибка при удалении!');
+        yield put({type: 'getBalances'});
+      }
+
     },
 
     * getStatusEnums({payload}, {call, put}) {

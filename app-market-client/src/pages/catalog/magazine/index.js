@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Button, Col, Container, Row, Table} from "reactstrap";
 import CatalogLayout from "../../../component/CatalogLayout";
 import {connect} from "dva";
-import {MdAddCircleOutline, MdDelete, MdModeEdit} from "react-icons/md";
-import MagazineModal from "../../../component/MagazineModal";
+import {MdDelete, MdModeEdit} from "react-icons/md";
+import MagazineModal from "../../../component/Modals/MagazineModal";
+import {GoPlus} from "react-icons/go";
 
 @connect(({magazineModel, app}) => ({magazineModel, app}))
 class Magazine extends Component {
@@ -60,15 +61,14 @@ class Magazine extends Component {
             <Row>
               <Col>
                 <h2 className="title">Magazine</h2>
-                <Button className="addBtn btn-light" onClick={() => openModal('')}><MdAddCircleOutline/>
-                  New
+                <Button className="addBtn btn-light rounded-circle" onClick={() => openModal('')}><GoPlus/>
                 </Button>
                 <Table className="table table-bordered table-striped table-hover">
                   <thead>
-                  <tr>
+                  <tr className="text-center">
                     <th>#</th>
-                    <th>Code</th>
                     <th>Name</th>
+                    <th>Code</th>
                     <th>Administrator</th>
                     <th>Extra Info</th>
                     <th style={styled}>Action</th>
@@ -77,15 +77,15 @@ class Magazine extends Component {
                   <tbody>
                   {magazines.map((item, i) =>
                     <tr key={item.id}>
-                      <td>{i + 1}</td>
-                      <td>{item.externalCode}</td>
-                      <td>{item.name}</td>
-                      <td>{item.phoneNumber}</td>
+                      <td className="text-center">{i + 1}</td>
+                      <td className="text-center font-weight-bold">{item.name}</td>
+                      <td className="text-center">{item.externalCode}</td>
+                      <td className="text-center">{item.phoneNumber}</td>
                       <td>{item.extraInfo}</td>
-                      <td>
-                        <Button className="btn-info" onClick={() => openModal(item)}><MdModeEdit/></Button>
-                        <Button className="btn-danger" onClick={(e) => {
-                          if (window.confirm('Are you sure you wish to delete this item?')) deleteMagazine(item.id)
+                      <td className="text-center">
+                        <Button className="btn-info float-none" onClick={() => openModal(item)}><MdModeEdit/></Button>
+                        <Button className="btn-danger float-none" onClick={(e) => {
+                          if (window.confirm('Вы действительно хотите удалить?')) deleteMagazine(item.id)
                         }}><MdDelete/></Button>
                       </td>
                     </tr>

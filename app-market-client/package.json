@@ -17,9 +17,11 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.10.0",
+    "react-text-mask": "^5.4.3",
     "react-toastify": "^5.5.0",
     "reactstrap": "^8.4.1",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "text-mask-addons": "^3.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",

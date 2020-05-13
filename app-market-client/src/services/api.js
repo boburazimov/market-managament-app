@@ -7,14 +7,15 @@ export default {
   addCurrency: 'POST /currency',
   getCurrency: '/currency',
   getCurrencies: '/currency',
-  editCurrency: 'PATCH /currency',
   deleteCurrency: 'DELETE /currency',
 
-  getCashBoxes: '/cashBox',
-  getCashBox: '/cashBox',
   addCashBox: 'POST /cashBox',
-  editCashBox: 'PATCH /cashBox',
+  getCashBoxes: '/cashBox',
   deleteCashBox: 'DELETE /cashBox',
+
+  addBalance: 'POST /balance',
+  getBalances: '/balance',
+  deleteBalance: 'DELETE /balance',
 
   userMe: '/user/userMe',
   getStatusEnums: '/status',
