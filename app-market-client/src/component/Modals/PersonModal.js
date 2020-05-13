@@ -26,7 +26,7 @@ const PersonModal = (props) => {
             <AvField name="inn" label="INN" defaultValue={currentItem.inn} placeholder="Enter the INN"/>
             <AvField name="accountNumber" label="Account number" defaultValue={currentItem.accountNumber}
                      placeholder="Enter the Account number"/>
-            <AvField name="extraInfo" label="Extra Info" defaultValue={currentItem.extraInfo}
+            <AvField type="textarea" name="extraInfo" label="Extra Info" defaultValue={currentItem.extraInfo}
                      placeholder="Enter the Extra Info"/>
           </ModalBody>
           <ModalFooter>

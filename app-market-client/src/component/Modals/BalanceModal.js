@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {AvFeedback, AvForm, AvGroup, AvInput} from "availity-reactstrap-validation";
-import CurrencyInput from '../MaskedInput/CurrencyInput'
 
 const BalanceModal = (props) => {
 
@@ -22,7 +21,7 @@ const BalanceModal = (props) => {
             </AvGroup>
             <AvGroup>
               <Label for="name">Комментарии</Label>
-              <AvInput name="extraInfo" value={currentItem ? currentItem.extraInfo : ''}
+              <AvInput type="textarea" name="extraInfo" value={currentItem ? currentItem.extraInfo : ''}
                        placeholder="Введите дополнительную информацию..."/>
             </AvGroup>
           </ModalBody>

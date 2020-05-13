@@ -17,6 +17,8 @@ export default {
   getBalances: '/balance',
   deleteBalance: 'DELETE /balance',
 
+  getPayMethodEnums: '/methodEnum',
+
   addPayType: 'POST /payType',
   getPayTypes: '/payType',
   deletePayType: 'DELETE /payType',

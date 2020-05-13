@@ -4,7 +4,7 @@ import router from "umi/router";
 
 const {
   userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
-  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes, deletePayType
+  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes, deletePayType, getPayMethodEnums
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -25,6 +25,7 @@ export default ({
     users: [],
     balances: [],
     payTypes: [],
+    methodEnums: [],
   },
 
   subscriptions: {
@@ -214,6 +215,12 @@ export default ({
       } else {
         toast.error(res.message)
       }
+      yield put({
+        type: 'updateState',
+        payload: {
+          currentItem: ''
+        }
+      })
     },
 
     * getPayTypes({payload}, {call, put}) {
@@ -237,6 +244,18 @@ export default ({
       } else {
         toast.success('Ошибка при удалении!');
         yield put({type: 'getPayTypes'});
+      }
+    },
+
+    * getPayMethodEnums({payload}, {call, put}) {
+      const res = yield call(getPayMethodEnums);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            methodEnums: res.object
+          }
+        })
       }
     },
 

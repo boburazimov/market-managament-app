@@ -10,15 +10,21 @@ import PayTypeModal from "../../../component/Modals/PayTypeModal";
 class PayType extends Component {
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'app/getPayTypes'
-    })
+    const {dispatch} = this.props;
+    dispatch({type: 'app/getPayTypes'});
+    dispatch({type: 'app/getPayMethodEnums'});
   }
 
   render() {
 
     const {dispatch, app} = this.props;
-    const {showModal, currentItem, payTypes} = app;
+    const {showModal, currentItem, payTypes, methodEnums} = app;
+
+    const defaultValue = {
+      methodEnum: currentItem ? currentItem.methodEnum : '',
+      name: currentItem ? currentItem.name : '',
+      extraInfo: currentItem ? currentItem.extraInfo : '',
+    };
 
     const openModal = (item) => {
       dispatch({
@@ -31,6 +37,7 @@ class PayType extends Component {
     };
 
     const addPayType = (e, v) => {
+      console.log(v);
       dispatch({
         type: 'app/addPayType',
         payload: {
@@ -59,6 +66,7 @@ class PayType extends Component {
                   <thead>
                   <tr className="text-center">
                     <th>№</th>
+                    <th>Метод оплаты</th>
                     <th>Вид оплаты</th>
                     <th>Комментарии</th>
                     <th>Действия</th>
@@ -68,11 +76,12 @@ class PayType extends Component {
                   {payTypes.map((item, i) =>
                     <tr key={item.id}>
                       <td className="text-center">{i + 1}</td>
+                      <td className="text-center font-weight-bold text-success">{item.methodEnum}</td>
                       <td className="text-center font-weight-bold">{item.name}</td>
                       <td className="text-center">{item.extraInfo}</td>
                       <td className="text-center">
                         <Button className="btn-danger float-none" onClick={() => openModal(item)}><MdModeEdit/></Button>
-                        <Button className="btn-info float-none" onClick={(e) => {
+                        <Button className="btn-info float-none" onClick={() => {
                           if (window.confirm('Вы действительно хотите удалить?')) deletePayType(item.id)
                         }}><MdDelete/></Button>
                       </td>
@@ -84,10 +93,12 @@ class PayType extends Component {
             </Row>
           </Container>
           <PayTypeModal
+            methodEnums={methodEnums}
             showModal={showModal}
             openModal={openModal}
             currentItem={currentItem}
             addPayType={addPayType}
+            defaultValue={defaultValue}
           />
         </CatalogLayout>
       </div>
