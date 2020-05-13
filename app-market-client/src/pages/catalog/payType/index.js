@@ -69,7 +69,7 @@ class PayType extends Component {
                     <tr key={item.id}>
                       <td className="text-center">{i + 1}</td>
                       <td className="text-center font-weight-bold">{item.name}</td>
-                      <td>{item.extraInfo}</td>
+                      <td className="text-center">{item.extraInfo}</td>
                       <td className="text-center">
                         <Button className="btn-danger float-none" onClick={() => openModal(item)}><MdModeEdit/></Button>
                         <Button className="btn-info float-none" onClick={(e) => {

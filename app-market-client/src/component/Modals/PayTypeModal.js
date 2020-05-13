@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {AvFeedback, AvForm, AvGroup, AvInput} from "availity-reactstrap-validation";
-import CurrencyInput from '../MaskedInput/CurrencyInput'
 
 const PayTypeModal = (props) => {
 
@@ -15,7 +14,7 @@ const PayTypeModal = (props) => {
           <ModalBody>
             <AvGroup>
               <Label for="currencyInput">Вид оплаты</Label>
-              <AvInput type="text" id="currencyInput" name="payType"
+              <AvInput type="text" id="currencyInput" name="name"
                        value={currentItem ? currentItem.name : ''} required/>
               <AvFeedback>Поля не заполнено!</AvFeedback>
             </AvGroup>

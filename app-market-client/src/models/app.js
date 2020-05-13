@@ -24,7 +24,7 @@ export default ({
     statusEnums: [],
     users: [],
     balances: [],
-
+    payTypes: [],
   },
 
   subscriptions: {
@@ -218,11 +218,12 @@ export default ({
 
     * getPayTypes({payload}, {call, put}) {
       const res = yield call(getPayTypes);
+      console.log(res);
       if (res.success) {
         yield put({
           type: 'updateState',
           payload: {
-            balances: res.object
+            payTypes: res._embedded.payType
           }
         })
       }
