@@ -17,6 +17,10 @@ export default {
   getBalances: '/balance',
   deleteBalance: 'DELETE /balance',
 
+  addPayType: 'POST /payType',
+  getPayTypes: '/payType',
+  deletePayType: 'DELETE /payType',
+
   userMe: '/user/userMe',
   getStatusEnums: '/status',
   getUsers: '/user/list',

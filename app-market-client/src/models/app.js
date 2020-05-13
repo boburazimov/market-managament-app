@@ -4,7 +4,7 @@ import router from "umi/router";
 
 const {
   userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
-  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance,
+  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes, deletePayType
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -194,6 +194,49 @@ export default ({
         yield put({type: 'getBalances'});
       }
 
+    },
+
+    * addPayType({payload}, {call, put}) {
+      const res = yield call(addPayType, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false
+          }
+        });
+        if (payload.id) {
+          toast.success("Вид оплаты изменен");
+        } else {
+          toast.success("Вид оплаты добавлен");
+        }
+        yield put({type: "getPayTypes"})
+      } else {
+        toast.error(res.message)
+      }
+    },
+
+    * getPayTypes({payload}, {call, put}) {
+      const res = yield call(getPayTypes);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            balances: res.object
+          }
+        })
+      }
+    },
+
+    * deletePayType({payload}, {call, put}) {
+      const res = yield call(deletePayType, payload);
+      if (res.success) {
+        toast.success('Вид оплаты удален!');
+        yield put({type: 'getPayTypes'});
+      } else {
+        toast.success('Ошибка при удалении!');
+        yield put({type: 'getPayTypes'});
+      }
     },
 
     * getStatusEnums({payload}, {call, put}) {
