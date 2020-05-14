@@ -12,10 +12,14 @@ public interface CustomCashBox {
 
     UUID getId();
 
+    String getExternalCode();
+
     String getName();
 
     Currency getCurrency();
 
     @Value("#{target.currency?.id?:null}")
     Integer getCurrencyId();
+
+    String getExtraInfo();
 }

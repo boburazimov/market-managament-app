@@ -10,7 +10,11 @@ public interface CustomCashDesk {
 
     UUID getId();
 
+    String getExternalCode();
+
     String getName();
 
     String getBalance();
+
+    String getExtraInfo();
 }

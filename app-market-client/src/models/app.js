@@ -4,7 +4,8 @@ import router from "umi/router";
 
 const {
   userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
-  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes, deletePayType, getPayMethodEnums
+  addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes,
+  deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox,
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -26,6 +27,7 @@ export default ({
     balances: [],
     payTypes: [],
     methodEnums: [],
+    cashBoxes: [],
   },
 
   subscriptions: {
@@ -225,7 +227,6 @@ export default ({
 
     * getPayTypes({payload}, {call, put}) {
       const res = yield call(getPayTypes);
-      console.log(res);
       if (res.success) {
         yield put({
           type: 'updateState',
@@ -244,6 +245,56 @@ export default ({
       } else {
         toast.success('Ошибка при удалении!');
         yield put({type: 'getPayTypes'});
+      }
+    },
+
+    * addCashBox({payload}, {call, put}) {
+      const res = yield call(addCashBox, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false
+          }
+        });
+        if (payload.id) {
+          toast.success("Касса изменена");
+        } else {
+          toast.success("Касса добавлен");
+        }
+        yield put({type: "getCashBoxes"})
+      } else {
+        toast.error(res.message)
+      }
+      yield put({
+        type: 'updateState',
+        payload: {
+          currentItem: ''
+        }
+      })
+    },
+
+    * getCashBoxes({payload}, {call, put}) {
+      const res = yield call(getCashBoxes);
+      console.log(res);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            cashBoxes: res._embedded.cashBox
+          }
+        })
+      }
+    },
+
+    * deleteCashBox({payload}, {call, put}) {
+      const res = yield call(deleteCashBox, payload);
+      if (res.success) {
+        toast.success('Касса удалена!');
+        yield put({type: 'getCashBoxes'});
+      } else {
+        toast.success('Ошибка при удалении!');
+        yield put({type: 'getCashBoxes'});
       }
     },
 

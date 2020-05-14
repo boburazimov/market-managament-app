@@ -4,29 +4,31 @@ import {Button, Col, Container, Row, Table} from "reactstrap";
 import {GoPlus} from "react-icons/go";
 import {connect} from "dva";
 import {MdDelete, MdModeEdit} from "react-icons/md";
-import PayTypeModal from "../../../component/Modals/PayTypeModal";
+import CashBoxModal from "../../../component/Modals/CashBoxModal";
 
 @connect(({app}) => ({app}))
-class PayType extends Component {
+class CashBox extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch({type: 'app/getPayTypes'});
-    dispatch({type: 'app/getPayMethodEnums'});
+    dispatch({type: 'app/getCashBoxes'});
+    dispatch({type: 'app/getCurrencies'});
   }
 
   render() {
 
     const {dispatch, app} = this.props;
-    const {showModal, currentItem, payTypes, methodEnums} = app;
+    const {showModal, currentItem, cashBoxes, currencies} = app;
 
     const defaultValue = {
-      methodEnum: currentItem ? currentItem.methodEnum : '',
+      currencyId: currentItem ? currentItem.currency : '',
       name: currentItem ? currentItem.name : '',
       extraInfo: currentItem ? currentItem.extraInfo : '',
+      externalCode: currentItem ? currentItem.externalCode : '',
     };
 
     const openModal = (item) => {
+      console.log(item);
       dispatch({
         type: 'app/updateState',
         payload: {
@@ -36,9 +38,10 @@ class PayType extends Component {
       })
     };
 
-    const addPayType = (e, v) => {
+    const addCashBox = (e, v) => {
+      console.log(v);
       dispatch({
-        type: 'app/addPayType',
+        type: 'app/addCashBox',
         payload: {
           id: currentItem ? currentItem.id : '',
           ...v
@@ -46,9 +49,9 @@ class PayType extends Component {
       })
     };
 
-    const deletePayType = (id) => {
+    const deleteCashBox = (id) => {
       dispatch({
-        type: 'app/deletePayType',
+        type: 'app/deleteCashBox',
         payload: {id}
       })
     };
@@ -65,23 +68,25 @@ class PayType extends Component {
                   <thead>
                   <tr className="text-center">
                     <th>№</th>
-                    <th>Метод оплаты</th>
-                    <th>Вид оплаты</th>
+                    <th>Внешний код</th>
+                    <th>Наименование</th>
+                    <th>Валюта</th>
                     <th>Комментарии</th>
                     <th>Действия</th>
                   </tr>
                   </thead>
                   <tbody>
-                  {payTypes.map((item, i) =>
+                  {cashBoxes.map((item, i) =>
                     <tr key={item.id}>
                       <td className="text-center">{i + 1}</td>
-                      <td className="text-center font-weight-bold text-success">{item.methodEnum}</td>
-                      <td className="text-center font-weight-bold">{item.name}</td>
+                      <td className="text-center">{item.externalCode}</td>
+                      <td className="text-center">{item.name}</td>
+                      <td className="text-center font-weight-bold">{item.currency.symbolCode}</td>
                       <td className="text-center">{item.extraInfo}</td>
                       <td className="text-center">
                         <Button className="btn-danger float-none" onClick={() => openModal(item)}><MdModeEdit/></Button>
                         <Button className="btn-info float-none" onClick={() => {
-                          if (window.confirm('Вы действительно хотите удалить?')) deletePayType(item.id)
+                          if (window.confirm('Вы действительно хотите удалить?')) deleteCashBox(item.id)
                         }}><MdDelete/></Button>
                       </td>
                     </tr>
@@ -91,12 +96,12 @@ class PayType extends Component {
               </Col>
             </Row>
           </Container>
-          <PayTypeModal
-            methodEnums={methodEnums}
+          <CashBoxModal
+            currencies={currencies}
             showModal={showModal}
             openModal={openModal}
             currentItem={currentItem}
-            addPayType={addPayType}
+            addCashBox={addCashBox}
             defaultValue={defaultValue}
           />
         </CatalogLayout>
@@ -105,6 +110,6 @@ class PayType extends Component {
   }
 }
 
-PayType.propTypes = {};
+CashBox.propTypes = {};
 
-export default PayType;
+export default CashBox;
