@@ -276,7 +276,6 @@ export default ({
 
     * getCashBoxes({payload}, {call, put}) {
       const res = yield call(getCashBoxes);
-      console.log(res);
       if (res.success) {
         yield put({
           type: 'updateState',

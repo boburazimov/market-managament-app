@@ -21,14 +21,13 @@ class CashBox extends Component {
     const {showModal, currentItem, cashBoxes, currencies} = app;
 
     const defaultValue = {
-      currencyId: currentItem ? currentItem.currency : '',
+      currency: currentItem ? `/${currentItem.currencyId}` : '',
       name: currentItem ? currentItem.name : '',
       extraInfo: currentItem ? currentItem.extraInfo : '',
       externalCode: currentItem ? currentItem.externalCode : '',
     };
 
     const openModal = (item) => {
-      console.log(item);
       dispatch({
         type: 'app/updateState',
         payload: {
@@ -39,7 +38,6 @@ class CashBox extends Component {
     };
 
     const addCashBox = (e, v) => {
-      console.log(v);
       dispatch({
         type: 'app/addCashBox',
         payload: {

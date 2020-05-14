@@ -24,9 +24,9 @@ const CashBoxModal = (props) => {
                        required/>
               <AvFeedback>Поля не заполнено!</AvFeedback>
             </AvGroup>
-            <AvRadioGroup inline name="currencyId" label="Валюта" errorMessage="Валюта не выбрана!" required>
+            <AvRadioGroup inline name="currency" label="Валюта" errorMessage="Валюта не выбрана!" required>
               {currencies ? currencies.map(item =>
-                <AvRadio key={item.id} customInput label={item.symbolCode} value={'/' + item.id}/>
+                <AvRadio key={item.id} customInput label={item.symbolCode} value={`/${item.id}`}/>
               ) : ''}
             </AvRadioGroup>
             <AvGroup>
