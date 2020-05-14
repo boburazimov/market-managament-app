@@ -15,8 +15,8 @@ const BalanceModal = (props) => {
             <AvGroup>
               <Label for="currencyInput">Остаток</Label>
               {/*<CurrencyInput className="input-group currencyInput" type="text" name="balance" id="name">*/}
-              <AvInput type="number" id="currencyInput" name="balance"
-                       value={currentItem ? currentItem.balance : ''} required/>
+              <AvInput type="number" id="currencyInput" name="balanceValue"
+                       value={currentItem ? currentItem.balanceValue : ''} required/>
               <AvFeedback>Поля не заполнено!</AvFeedback>
             </AvGroup>
             <AvGroup>

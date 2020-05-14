@@ -13,7 +13,6 @@ import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqMagazine;
 import uz.sav.market.payload.ResMagazine;
 import uz.sav.market.payload.ResPageable;
-import uz.sav.market.repository.MBalanceRepository;
 import uz.sav.market.repository.MagazineRepository;
 import uz.sav.market.repository.UserRepository;
 import uz.sav.market.utils.CommonUtils;
@@ -28,8 +27,6 @@ public class MagazineServiceImpl implements MagazineService {
     MagazineRepository magazineRepository;
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    MBalanceRepository balanceRepository;
 
     @Override
     public ApiResponse addMagazine(ReqMagazine request, User user) {
@@ -43,7 +40,7 @@ public class MagazineServiceImpl implements MagazineService {
             magazine.setUser(userRepository.findById(request.getUserId()).orElseThrow(() -> new ResourceNotFoundException("getUser")));
             magazine.setExtraInfo(request.getExtraInfo());
             magazineRepository.save(magazine);
-            return new ApiResponse(request.getId() == null ? "Magazine saved!" : "Magazine edited!", true);
+            return new ApiResponse(request.getId() == null ? "Магазин добавлен!" : "Магазин изменен!", true);
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), false);
         }
@@ -81,7 +78,7 @@ public class MagazineServiceImpl implements MagazineService {
         try {
             Magazine magazine = magazineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("getMagazine"));
             magazineRepository.deleteById(magazine.getId());
-            return new ApiResponse("Magazine deleted!", true);
+            return new ApiResponse("Магазин удален!", true);
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), false);
         }

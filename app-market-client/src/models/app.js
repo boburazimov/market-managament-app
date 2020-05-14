@@ -28,6 +28,7 @@ export default ({
     payTypes: [],
     methodEnums: [],
     cashBoxes: [],
+    cashDesks:[],
   },
 
   subscriptions: {
@@ -103,10 +104,10 @@ export default ({
     * deleteMagazine({payload}, {call, put}) {
       const res = yield call(deleteMagazine, payload);
       if (res.success) {
-        toast.success('Маркет удален!');
+        toast.success(res.message);
         yield put({type: 'getMagazines'});
       } else {
-        toast.success('Ошибка при удалении!');
+        toast.error('Ошибка при удалении!');
         yield put({type: 'getMagazines'});
       }
     },
@@ -181,7 +182,7 @@ export default ({
         yield put({
           type: 'updateState',
           payload: {
-            balances: res.object
+            balances: res._embedded.mBalance
           }
         })
       }

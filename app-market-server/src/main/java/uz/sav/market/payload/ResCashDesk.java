@@ -9,11 +9,21 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResMBalance {
+public class ResCashDesk {
 
     private UUID id;
 
-    private Double balance;
+    private String externalCode;
+
+    private String name;
+
+    private UUID magazineId;
+
+    private String magazineName;
+
+    private UUID mBalanceId;
+
+    private Double balanceValue;
 
     private String extraInfo;
 }

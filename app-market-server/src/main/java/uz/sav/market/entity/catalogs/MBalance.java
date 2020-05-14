@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 public class MBalance extends AbsEntity {
 
     @Column(unique = true, nullable = false, length = 8)
-    private Double balance;
+    private Double balanceValue;
 
     private String extraInfo;
 }

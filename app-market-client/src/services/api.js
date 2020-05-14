@@ -13,9 +13,9 @@ export default {
   getCashBoxes: '/cashBox',
   deleteCashBox: 'DELETE /cashBox',
 
-  addBalance: 'POST /balance',
-  getBalances: '/balance',
-  deleteBalance: 'DELETE /balance',
+  addBalance: 'POST /mBalance',
+  getBalances: '/mBalance',
+  deleteBalance: 'DELETE /mBalance',
 
   getPayMethodEnums: '/methodEnum',
 

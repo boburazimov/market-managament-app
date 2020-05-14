@@ -7,48 +7,48 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import uz.sav.market.entity.catalogs.MBalance;
+import uz.sav.market.entity.catalogs.CashDesk;
 import uz.sav.market.entity.catalogs.User;
 import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
-import uz.sav.market.payload.ReqMBalance;
-import uz.sav.market.repository.MBalanceRepository;
+import uz.sav.market.payload.ReqCashDesk;
+import uz.sav.market.repository.CashDeskRepository;
 import uz.sav.market.security.CurrentUser;
-import uz.sav.market.service.MBalanceService;
+import uz.sav.market.service.CashDeskService;
 import uz.sav.market.utils.AppConstants;
 
 import java.util.UUID;
 
 @Controller
-@RequestMapping(path = "/api/balance")
-public class MBalanceController {
+@RequestMapping(path = "/api/cashDesk")
+public class CashDeskController {
 
     @Autowired
-    MBalanceRepository balanceRepository;
+    CashDeskService cashDeskService;
     @Autowired
-    MBalanceService balanceService;
+    CashDeskRepository cashDeskRepository;
 
     @PostMapping
-    public HttpEntity<?> addMbalance(@RequestBody ReqMBalance reqMBalance, @CurrentUser User user) {
-        ApiResponse apiResponse = balanceService.addMBalance(reqMBalance, user);
+    public HttpEntity<?> addCashDesk(@RequestBody ReqCashDesk cashDesk, @CurrentUser User user) {
+        ApiResponse apiResponse = cashDeskService.addCashDesk(cashDesk, user);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.CREATED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
     @GetMapping("/{id}")
-    public HttpEntity<?> getMbalance(@PathVariable UUID id) {
-        MBalance balance = balanceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("getMbalance"));
-        return ResponseEntity.ok(balanceService.getMBalance(balance));
+    public HttpEntity<?> getCashDesk(@PathVariable UUID id) {
+        CashDesk cashDesk = cashDeskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("getCashDesk"));
+        return ResponseEntity.ok(cashDeskService.getCashDesk(cashDesk));
     }
 
     @GetMapping
-    public HttpEntity<?> getMbalances(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE) int page,
+    public HttpEntity<?> getCashDesks(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE) int page,
                                       @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_SIZE) int size) throws BadRequestException {
-        return ResponseEntity.ok(balanceService.getMBalances(page, size));
+        return ResponseEntity.ok(cashDeskService.getCashDesks(page, size));
     }
 
     @DeleteMapping("/{id}")
-    public HttpEntity<?> deleteMbalance(@PathVariable UUID id) {
-        ApiResponse apiResponse = balanceService.deleteMBalance(id);
+    public HttpEntity<?> deleteCashDesk(@PathVariable UUID id) {
+        ApiResponse apiResponse = cashDeskService.deleteCashDesk(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
 }

@@ -20,14 +20,14 @@ public class CashDesk extends AbsEntity {
     @Column(unique = true, nullable = false)
     private String externalCode;
 
+    @Column(nullable = false, unique = true)
+    private String name;
+
     @ManyToOne(optional = false)
     private Magazine magazine;
 
     @ManyToOne(optional = false)
     private MBalance balance;
-
-    @Column(nullable = false, unique = true)
-    private String name;
 
     private String extraInfo;
 }

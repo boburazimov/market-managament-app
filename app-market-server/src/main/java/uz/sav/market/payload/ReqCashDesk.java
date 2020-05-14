@@ -4,17 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReqMBalance {
+public class ReqCashDesk {
 
     private UUID id;
 
-    private Double balance;
+    private String externalCode;
+
+    private UUID magazineId;
+
+    private UUID mBalanceId;
+
+    private String name;
 
     private String extraInfo;
 }
