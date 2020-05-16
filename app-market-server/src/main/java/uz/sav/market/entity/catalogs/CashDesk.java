@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import uz.sav.market.entity.enums.StatusEnum;
 import uz.sav.market.entity.template.AbsEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,4 +29,7 @@ public class CashDesk extends AbsEntity {
     private MBalance balance;
 
     private String extraInfo;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusEnum statusEnum;
 }

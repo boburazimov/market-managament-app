@@ -37,14 +37,15 @@ public class CashDeskServiceImpl implements CashDeskService {
         try {
             CashDesk cashDesk = new CashDesk();
             if (request.getId() != null)
-                cashDeskRepository.findById(request.getId()).orElseThrow(() -> new ResourceNotFoundException("getCashDesk"));
+                cashDesk = cashDeskRepository.findById(request.getId()).orElseThrow(() -> new ResourceNotFoundException("getCashDesk"));
             cashDesk.setExternalCode(request.getExternalCode());
             cashDesk.setMagazine(magazineRepository.findById(request.getMagazineId()).orElseThrow(() -> new ResourceNotFoundException("getCashDesk")));
             cashDesk.setBalance(balanceRepository.findById(request.getMBalanceId()).orElseThrow(() -> new ResourceNotFoundException("getCashDesk")));
             cashDesk.setName(request.getName());
             cashDesk.setExtraInfo(request.getExtraInfo());
+            cashDesk.setStatusEnum(request.getStatusEnum());
             cashDeskRepository.save(cashDesk);
-            return new ApiResponse(request.getId() == null ? "Касса ККМ добавлен!" : "Касса ККМ измене!", true);
+            return new ApiResponse(request.getId() == null ? "Касса ККМ добавлен!" : "Касса ККМ изменен!", true);
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), false);
         }
@@ -52,6 +53,7 @@ public class CashDeskServiceImpl implements CashDeskService {
 
     @Override
     public ResCashDesk getCashDesk(CashDesk cashDesk) {
+
         return new ResCashDesk(
                 cashDesk.getId(),
                 cashDesk.getExternalCode(),
@@ -60,7 +62,8 @@ public class CashDeskServiceImpl implements CashDeskService {
                 cashDesk.getMagazine().getName(),
                 cashDesk.getBalance().getId(),
                 cashDesk.getBalance().getBalanceValue(),
-                cashDesk.getExtraInfo()
+                cashDesk.getExtraInfo(),
+                cashDesk.getStatusEnum()
         );
     }
 

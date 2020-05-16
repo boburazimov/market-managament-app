@@ -1,5 +1,5 @@
 import React from 'react';
-import {AvField, AvForm} from "availity-reactstrap-validation";
+import {AvField, AvForm, AvInput} from "availity-reactstrap-validation";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 const PersonModal = (props) => {
@@ -26,7 +26,7 @@ const PersonModal = (props) => {
             <AvField name="inn" label="INN" defaultValue={currentItem.inn} placeholder="Enter the INN"/>
             <AvField name="accountNumber" label="Account number" defaultValue={currentItem.accountNumber}
                      placeholder="Enter the Account number"/>
-            <AvField type="textarea" name="extraInfo" label="Extra Info" defaultValue={currentItem.extraInfo}
+            <AvField type="textarea" style={{height: '100px'}} name="extraInfo" label="Extra Info" defaultValue={currentItem.extraInfo}
                      placeholder="Enter the Extra Info"/>
           </ModalBody>
           <ModalFooter>

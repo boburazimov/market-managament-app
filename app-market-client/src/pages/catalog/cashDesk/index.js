@@ -12,19 +12,23 @@ class CashDesk extends Component {
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch({type: 'app/getCashDesks'});
-    dispatch({type: 'app/getCurrencies'});
+    dispatch({type: 'app/getStatusEnums'});
+    dispatch({type: 'app/getMagazines'});
+    dispatch({type: 'app/getBalances'});
   }
 
   render() {
 
     const {dispatch, app} = this.props;
-    const {showModal, currentItem, cashDesks, currencies} = app;
+    const {showModal, currentItem, cashDesks, magazines, balances, statusEnums} = app;
 
     const defaultValue = {
-      currency: currentItem ? `/${currentItem.currencyId}` : '',
       name: currentItem ? currentItem.name : '',
-      extraInfo: currentItem ? currentItem.extraInfo : '',
       externalCode: currentItem ? currentItem.externalCode : '',
+      statusEnum: currentItem ? currentItem.statusEnum : '',
+      extraInfo: currentItem ? currentItem.extraInfo : '',
+      magazineId: currentItem ? currentItem.magazineId : '',
+      mBalanceId: currentItem ? currentItem.mBalanceId : '',
     };
 
     const openModal = (item) => {
@@ -71,6 +75,7 @@ class CashDesk extends Component {
                     <th>Магазин</th>
                     <th>Баланс</th>
                     <th>Комментарии</th>
+                    <th>Статус</th>
                     <th>Действия</th>
                   </tr>
                   </thead>
@@ -80,8 +85,10 @@ class CashDesk extends Component {
                       <td className="text-center">{i + 1}</td>
                       <td className="text-center">{item.externalCode}</td>
                       <td className="text-center">{item.name}</td>
-                      <td className="text-center font-weight-bold">{item.currency.symbolCode}</td>
+                      <td className="text-center font-weight-bold">{item.magazineName}</td>
+                      <td className="text-center">{item.balanceValue}</td>
                       <td className="text-center">{item.extraInfo}</td>
+                      <td className="text-center">{item.statusEnum}</td>
                       <td className="text-center">
                         <Button className="btn-danger float-none" onClick={() => openModal(item)}><MdModeEdit/></Button>
                         <Button className="btn-info float-none" onClick={() => {
@@ -96,12 +103,14 @@ class CashDesk extends Component {
             </Row>
           </Container>
           <CashDeskModal
-            currencies={currencies}
             showModal={showModal}
             openModal={openModal}
             currentItem={currentItem}
             addCashDesk={addCashDesk}
             defaultValue={defaultValue}
+            statusEnums={statusEnums}
+            magazines={magazines}
+            balances={balances}
           />
         </CatalogLayout>
       </div>

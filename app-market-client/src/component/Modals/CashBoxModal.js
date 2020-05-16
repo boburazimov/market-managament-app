@@ -31,7 +31,7 @@ const CashBoxModal = (props) => {
             </AvRadioGroup>
             <AvGroup>
               <Label for="name">Комментарии</Label>
-              <AvInput type="textarea" name="extraInfo"
+              <AvInput type="textarea" style={{height: '100px'}} name="extraInfo"
                        placeholder="Введите дополнительную информацию..."/>
             </AvGroup>
           </ModalBody>

@@ -3,6 +3,7 @@ package uz.sav.market.payload;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.sav.market.entity.enums.StatusEnum;
 
 import java.util.UUID;
 
@@ -26,4 +27,6 @@ public class ResCashDesk {
     private Double balanceValue;
 
     private String extraInfo;
+
+    private StatusEnum statusEnum;
 }

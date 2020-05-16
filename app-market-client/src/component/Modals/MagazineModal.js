@@ -29,7 +29,8 @@ const MagazineModal = (props) => {
                 <option key={item.id} value={item.id}>{item.phoneNumber}</option>
               ) : ''}
             </AvField>
-            <AvField type="textarea" name="extraInfo" label="Extra Info" value={currentItem ? currentItem.extraInfo : ''}
+            <AvField type="textarea" style={{height: '100px'}} name="extraInfo" label="Extra Info"
+                     value={currentItem ? currentItem.extraInfo : ''}
                      placeholder="Enter the Extra Info"/>
           </ModalBody>
           <ModalFooter>

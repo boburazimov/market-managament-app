@@ -23,6 +23,10 @@ export default {
   getPayTypes: '/payType',
   deletePayType: 'DELETE /payType',
 
+  addCashDesk: 'POST /cashDesk',
+  getCashDesks: '/cashDesk',
+  deleteCashDesk: 'DELETE /cashDesk',
+
   userMe: '/user/userMe',
   getStatusEnums: '/status',
   getUsers: '/user/list',

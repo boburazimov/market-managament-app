@@ -5,7 +5,7 @@ import router from "umi/router";
 const {
   userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
   addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes,
-  deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox,
+  deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox, addCashDesk, getCashDesks, deleteCashDesk,
 } = api;
 
 let openPages = ['/login', '/register', '/'];
@@ -28,7 +28,7 @@ export default ({
     payTypes: [],
     methodEnums: [],
     cashBoxes: [],
-    cashDesks:[],
+    cashDesks: [],
   },
 
   subscriptions: {
@@ -150,7 +150,7 @@ export default ({
         toast.success('Валюта удалена!');
         yield put({type: 'getCurrencies'});
       } else {
-        toast.success('Ошибка при удалении!');
+        toast.error('Ошибка при удалении!');
         yield put({type: 'getCurrencies'});
       }
     },
@@ -194,7 +194,7 @@ export default ({
         toast.success('Баланс удален!');
         yield put({type: 'getBalances'});
       } else {
-        toast.success('Ошибка при удалении!');
+        toast.error('Ошибка при удалении!');
         yield put({type: 'getBalances'});
       }
 
@@ -244,8 +244,7 @@ export default ({
         toast.success('Вид оплаты удален!');
         yield put({type: 'getPayTypes'});
       } else {
-        toast.success('Ошибка при удалении!');
-        yield put({type: 'getPayTypes'});
+        toast.error('Ошибка при удалении!');
       }
     },
 
@@ -293,8 +292,46 @@ export default ({
         toast.success('Касса удалена!');
         yield put({type: 'getCashBoxes'});
       } else {
-        toast.success('Ошибка при удалении!');
-        yield put({type: 'getCashBoxes'});
+        toast.error('Ошибка при удалении!');
+      }
+    },
+
+    * addCashDesk({payload}, {call, put}) {
+      const res = yield call(addCashDesk, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            showModal: false,
+            currentItem: ''
+          }
+        });
+        toast.success(res.message);
+        yield put({type: "getCashDesks"})
+      } else {
+        toast.error(res.message)
+      }
+    },
+
+    * getCashDesks({payload}, {call, put}) {
+      const res = yield call(getCashDesks);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            cashDesks: res.object
+          }
+        })
+      }
+    },
+
+    * deleteCashDesk({payload}, {call, put}) {
+      const res = yield call(deleteCashDesk, payload);
+      if (res.success) {
+        toast.success(res.message);
+        yield put({type: 'getCashDesks'});
+      } else {
+        toast.error('Ошибка при удалении!');
       }
     },
 

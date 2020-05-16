@@ -15,9 +15,9 @@
 
   .card {
     border-radius: 4px;
-    -webkit-box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.75);
 
     .enter-login {
       text-align: center;
@@ -214,6 +214,43 @@
 
 
 }
+
+.menuPage {
+  min-height: 400px;
+  padding-bottom: 20px;
+  border: solid black;
+  border-radius: 5px;
+}
+
+.table {
+  font-family: Calibri, serif;
+  font-weight: bold;
+
+  border-collapse: initial;
+  tbody {
+    .desc-text{
+      background-color: rgba(121, 172, 255, 0.22);
+    }
+    td, th {
+      position: relative;
+      vertical-align: middle;
+      padding: .10rem;
+    }
+  }
+
+  .thead-default {
+    background-color: rgba(0, 0, 0, 0.22);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+
+    td, th {
+      position: relative;
+      padding: .30rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+}
+
 
 .inputPage {
   .container {

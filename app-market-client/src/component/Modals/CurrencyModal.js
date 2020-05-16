@@ -26,7 +26,7 @@ const CurrencyModal = (props) => {
             </AvGroup>
             <AvGroup>
               <Label for="name">Комментарии</Label>
-              <AvInput type="textarea" name="extraInfo" value={currentItem ? currentItem.extraInfo : ''}
+              <AvInput type="textarea" style={{height: '100px'}} name="extraInfo" value={currentItem ? currentItem.extraInfo : ''}
                        placeholder="Enter the comment..."/>
             </AvGroup>
           </ModalBody>
