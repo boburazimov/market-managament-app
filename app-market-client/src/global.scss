@@ -218,23 +218,52 @@
 .menuPage {
   min-height: 400px;
   padding-bottom: 20px;
-  border: solid black;
-  border-radius: 5px;
+  border: 2px solid #8c9298;
+  border-radius: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .table {
   font-family: Calibri, serif;
+  font-size: 12px;
   font-weight: bold;
-
   border-collapse: initial;
+
   tbody {
-    .desc-text{
+    .desc-text {
       background-color: rgba(121, 172, 255, 0.22);
     }
+
+    .input-field {
+      margin: 0 auto;
+      height: calc(1.5em + .25rem + 2px);
+
+     > .form-control {
+        font-family: Calibri, serif;
+        font-size: 12px;
+        height: calc(1.5em + .25rem + 2px);
+        border-radius: 0;
+      }
+    }
+
     td, th {
       position: relative;
       vertical-align: middle;
-      padding: .10rem;
+      padding: .10rem .30rem .10rem .30rem;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0;
     }
   }
 
