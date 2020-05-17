@@ -87,8 +87,8 @@ class Index extends Component {
                   <th className="desc-text">Сальдо на начало</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right" type="text" id="externalCode" name="externalCode"
+                               readOnly/>
                     </AvGroup>
                   </td>
                   <td>
