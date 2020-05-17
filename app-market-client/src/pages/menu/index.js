@@ -70,7 +70,7 @@ class Index extends Component {
 
           <AvForm onValidSubmit={onHandleSubmit}>
             <Row className="card-body justify-content-center">
-              <Table className="table mb-0" bordered hover={true}>
+              <Table className="table mb-0" id="sassProps" bordered hover={true}>
                 {/*КАССИР БЛОК - Начало*/}
                 <thead className="thead-default">
                 <tr>
@@ -84,65 +84,179 @@ class Index extends Component {
                 <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td className="desc-text">Сальдо на начало</td>
-                  <AvGroup className="input-field">
-                    <AvInput type="number" validate={validateProps} id="externalCode" name="externalCode"
-                             placeholder="0.00"/>
-                  </AvGroup>
-                  <AvGroup className="input-field">
-                    <AvInput type="number" validate={validateProps} id="externalCode" name="externalCode"
-                             placeholder="0.00"/>
-                  </AvGroup>
-                  <td></td>
+                  <th className="desc-text">Сальдо на начало</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
-                  <td className="desc-text">Чистый UZ</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Чистый UZ</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Чистый за день UZS</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Чистый за день UZS</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">ONLINE карта</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">ONLINE карта</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">UnionPay</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">UnionPay</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Humo</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Humo</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Накоп.сдачи/недоздача</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Накоп.сдачи/недоздача</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="text-right desc-text">ИТОГО:</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 </tbody>
                 {/*КАССИР БЛОК - Конец*/}
@@ -160,59 +274,179 @@ class Index extends Component {
                 <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td className="desc-text">Приход UZS</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Приход UZS</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
-                  <td className="desc-text">Приход UZK</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Приход UZK</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Расход UZS (возврат)</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Расход UZS (возврат)</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Расход UZK (возврат)</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Расход UZK (возврат)</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">UnionPay</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">UnionPay</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Чистая выручка UZS</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Чистая выручка UZK</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="text-right desc-text">ИТОГО:</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 </tbody>
                 {/*ARTIX БЛОК - Конец*/}
@@ -230,59 +464,179 @@ class Index extends Component {
                 <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td className="desc-text">Разница - UZS</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Разница - UZS</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
-                  <td className="desc-text">Разница - UZK</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Разница - UZK</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">СВЕРКА КАССА</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">СВЕРКА КАССА</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">ИНКАССА</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">ИНКАССА</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
-                  <td className="desc-text">Сальдо на конец</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th className="desc-text">Сальдо на конец</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Чистая выручка UZS</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Чистая выручка UZK</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="text-right desc-text">ИТОГО:</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode" name="externalCode"
+                               placeholder="0.00"/>
+                    </AvGroup>
+                  </td>
                 </tr>
                 </tbody>
                 {/*БЛОК СВЕРКА - Конец*/}

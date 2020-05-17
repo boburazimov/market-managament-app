@@ -234,52 +234,63 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.table {
+#sassProps {
   font-family: Calibri, serif;
   font-size: 12px;
   font-weight: bold;
   border-collapse: initial;
 
-  tbody {
-    .desc-text {
-      background-color: rgba(121, 172, 255, 0.22);
-    }
-
-    .input-field {
-      margin: 0 auto;
-      height: calc(1.5em + .25rem + 2px);
-
-     > .form-control {
-        font-family: Calibri, serif;
-        font-size: 12px;
-        height: calc(1.5em + .25rem + 2px);
-        border-radius: 0;
-      }
-    }
-
-    td, th {
-      position: relative;
-      vertical-align: middle;
-      padding: .10rem .30rem .10rem .30rem;
-      background-clip: padding-box;
-      border: 1px solid #ced4da;
-      border-radius: 0;
-    }
-  }
-
   .thead-default {
     background-color: rgba(0, 0, 0, 0.22);
     border-bottom: 1px solid rgba(0, 0, 0, .125);
 
-    td, th {
-      position: relative;
-      padding: .30rem;
-      text-align: center;
-      vertical-align: middle;
+    tr {
+      th {
+        position: relative;
+        padding: .30rem;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      th {
+        position: relative;
+        vertical-align: middle;
+        padding: .10rem .30rem .10rem .30rem;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0;
+      }
+
+      td {
+        position: relative;
+        vertical-align: middle;
+        padding: 0;
+        background-clip: padding-box;
+        border: none;
+      }
+
+      .input-field {
+        margin: 0 auto;
+        height: calc(1.5em + .25rem + 2px);
+
+        > .form-control {
+          font-family: Calibri, serif;
+          font-size: 12px;
+          height: calc(1.5em + .25rem + 2px);
+          border-radius: 0;
+        }
+      }
+    }
+
+    .desc-text {
+      background-color: rgba(121, 172, 255, 0.22);
     }
   }
 }
-
 
 .inputPage {
   .container {
