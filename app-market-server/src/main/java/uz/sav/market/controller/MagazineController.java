@@ -17,6 +17,7 @@ import uz.sav.market.security.CurrentUser;
 import uz.sav.market.service.MagazineService;
 import uz.sav.market.utils.AppConstants;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -50,5 +51,13 @@ public class MagazineController {
     public HttpEntity<?> deleteMagazine(@PathVariable UUID id) {
         ApiResponse apiResponse = magazineService.deleteMagazine(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
+    }
+
+    @GetMapping("/byUser")
+    public HttpEntity<?> getMagazineBy(@RequestParam(value = "id", defaultValue = "") String id) {
+        Magazine magazine = new Magazine();
+        if (!id.isEmpty())
+            magazine = magazineRepository.findByUserId(UUID.fromString(id)).orElseGet(Magazine::new);
+        return ResponseEntity.ok(new ApiResponse("Получен магазин по пользователю", true, magazineService.getMagazine(magazine)));
     }
 }

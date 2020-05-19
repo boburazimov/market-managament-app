@@ -3,12 +3,14 @@ import {toast} from "react-toastify";
 import router from "umi/router";
 
 const {
-  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
+  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine, getMagazineByUser,
   addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes,
-  deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox, addCashDesk, getCashDesks, deleteCashDesk,
+  deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox,
+  addCashDesk, getCashDesks, deleteCashDesk, getCashDeskByMagazineId,
 } = api;
 
 let openPages = ['/login', '/register', '/'];
+let userPages = ['/menu', '/register', '/', '/catalog/magazine', '/catalog/balance', '/report'];
 // let cashierPages = ['/input'];
 // let adminPages = ['/input', '/catalog'];
 
@@ -17,9 +19,9 @@ export default ({
   namespace: 'app',
 
   state: {
+    currentUser: '',
     pathname: '',
     showModal: false,
-    currentUser: '',
     magazines: [],
     currencies: [],
     statusEnums: [],
@@ -29,19 +31,24 @@ export default ({
     methodEnums: [],
     cashBoxes: [],
     cashDesks: [],
+    marketBalance: '',
+    cashDesksByMagazine: [],
+    currentMagazine: '',
+    abc: 'бошлангич стат',
+    isAdmin: false,
   },
 
   subscriptions: {
     setup({dispatch, history}) {
       history.listen(({pathname}) => {
-        if (!openPages.includes(pathname)) {
-          dispatch({
-            type: 'userMe',
-            payload: {
-              pathname
-            }
-          })
-        }
+        // if (!openPages.includes(pathname)) {
+        dispatch({
+          type: 'userMe',
+          payload: {
+            pathname
+          }
+        })
+        // }
       })
     }
   },
@@ -53,10 +60,23 @@ export default ({
         const res = yield call(userMe);
         if (!res.success) {
           yield put({type: 'updateState', payload: {currentUser: ''}});
-          toast.success(res.message);
-          router.push("/");
+          if (!openPages.includes(payload.pathname)) {
+            router.push("/");
+          }
         } else {
-          yield put({type: 'updateState', payload: {currentUser: res}})
+          yield put({
+            type: 'updateState',
+            payload: {
+              currentUser: res,
+              isAdmin: res.roles.filter(item => item.name === 'ROLE_ADMIN').length
+            }
+          });
+          if (res.roles.filter(item => item.name === 'ROLE_USER').length) {
+            if (!userPages.includes(payload.pathname)) {
+              router.push("/")
+            }
+          }
+          yield put({type: 'getMagazineByUser', payload: {id: res.id}});
         }
       } catch (e) {
         toast.error(e.message)
@@ -109,6 +129,18 @@ export default ({
       } else {
         toast.error('Ошибка при удалении!');
         yield put({type: 'getMagazines'});
+      }
+    },
+
+    * getMagazineByUser({payload}, {call, put, select}) {
+      const res = yield call(getMagazineByUser, payload);
+      if (res.success) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            currentMagazine: res.data
+          }
+        });
       }
     },
 
@@ -320,6 +352,19 @@ export default ({
           type: 'updateState',
           payload: {
             cashDesks: res.object
+          }
+        })
+      }
+    },
+
+    * getCashDeskByMagazineId({payload}, {call, put}) {
+      const res = yield call(getCashDeskByMagazineId, payload);
+      if (res.success) {
+        console.log(res);
+        yield put({
+          type: 'updateState',
+          payload: {
+            cashDesksByMagazine: res.object
           }
         })
       }

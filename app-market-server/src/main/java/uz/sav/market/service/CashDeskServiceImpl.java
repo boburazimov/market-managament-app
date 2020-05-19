@@ -8,6 +8,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import uz.sav.market.entity.catalogs.CashDesk;
 import uz.sav.market.entity.catalogs.User;
+import uz.sav.market.entity.enums.StatusEnum;
 import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqCashDesk;
@@ -18,6 +19,7 @@ import uz.sav.market.repository.MagazineRepository;
 import uz.sav.market.repository.rest.MBalanceRepository;
 import uz.sav.market.utils.CommonUtils;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -90,5 +92,12 @@ public class CashDeskServiceImpl implements CashDeskService {
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), false);
         }
+    }
+
+    @Override
+    public List<ResCashDesk> getCashDesksByMagazine(UUID magazineId) {
+        List<CashDesk> byMagazineAndAndStatusEnum = cashDeskRepository.findAllByMagazineIdAndAndStatusEnum(magazineId, StatusEnum.ACTIVE);
+        return byMagazineAndAndStatusEnum.stream().map(this::getCashDesk).collect(Collectors.toList());
+
     }
 }

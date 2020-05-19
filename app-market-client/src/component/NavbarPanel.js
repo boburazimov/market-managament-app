@@ -19,7 +19,7 @@ class NavbarPanel extends Component {
 
     const {isOpen} = this.state;
     const {app} = this.props;
-    const {currentUser} = app;
+    const {currentUser, isAdmin} = app;
 
     const toggle = () => this.setState(!isOpen);
 
@@ -42,14 +42,14 @@ class NavbarPanel extends Component {
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
+                {isAdmin?<NavItem>
+                  <NavLink href="/menu">Menu</NavLink>
+                </NavItem>:''}
                 <NavItem>
-                  <NavLink href="/menu/">Menu</NavLink>
+                  <NavLink href="/report">Hibot</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/report/">Hibot</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/instruction/">Yo'riqnoma</NavLink>
+                  <NavLink href="/instruction">Yo'riqnoma</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/catalog/magazine">Catalog</NavLink>
