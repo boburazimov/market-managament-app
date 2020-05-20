@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from "dva";
 import {STORAGE_NAME} from "../utils/constant";
 import {router} from "umi";
-
+import logo from "../../public/assets/images/logo.png"
 @connect(({app}) => ({app}))
 class NavbarPanel extends Component {
 
@@ -38,7 +38,7 @@ class NavbarPanel extends Component {
       <div>
         <Navbar color="light" light expand="md">
           <Container className="container">
-            <NavbarBrand href="/">HAVAS</NavbarBrand>
+            <NavbarBrand href="/"><img src={logo} alt="logo"/></NavbarBrand>
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
