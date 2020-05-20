@@ -56,11 +56,12 @@ public class CashDeskServiceImpl implements CashDeskService {
     @Override
     public ResCashDesk getCashDesk(CashDesk cashDesk) {
 
+        assert cashDesk.getMagazine() != null;
         return new ResCashDesk(
                 cashDesk.getId(),
                 cashDesk.getExternalCode(),
                 cashDesk.getName(),
-                cashDesk.getMagazine().getId(),
+                cashDesk.getMagazine() == null ? null : cashDesk.getMagazine().getId(),
                 cashDesk.getMagazine().getName(),
                 cashDesk.getBalance().getId(),
                 cashDesk.getBalance().getBalanceValue(),

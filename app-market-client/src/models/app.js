@@ -10,9 +10,16 @@ const {
 } = api;
 
 let openPages = ['/login', '/register', '/'];
-let userPages = ['/menu', '/register', '/', '/catalog/magazine', '/catalog/balance', '/report'];
-// let cashierPages = ['/input'];
-// let adminPages = ['/input', '/catalog'];
+let userPages = ['/menu', '/register', '/', '/login',
+  '/catalog/magazine',
+  '/catalog/balance',
+  '/catalog/balance',
+  '/catalog/payType',
+  '/catalog/currency',
+  '/catalog/cashDesk',
+  '/catalog/cashBox',
+];
+let adminPages = ['/input', '/catalog'];
 
 export default ({
 
@@ -32,23 +39,20 @@ export default ({
     cashBoxes: [],
     cashDesks: [],
     marketBalance: '',
-    cashDesksByMagazine: [],
+    CurrentCashDesks: [],
     currentMagazine: '',
-    abc: 'бошлангич стат',
     isAdmin: false,
   },
 
   subscriptions: {
     setup({dispatch, history}) {
       history.listen(({pathname}) => {
-        // if (!openPages.includes(pathname)) {
         dispatch({
           type: 'userMe',
           payload: {
             pathname
           }
         })
-        // }
       })
     }
   },
@@ -132,7 +136,7 @@ export default ({
       }
     },
 
-    * getMagazineByUser({payload}, {call, put, select}) {
+    * getMagazineByUser({payload}, {call, put}) {
       const res = yield call(getMagazineByUser, payload);
       if (res.success) {
         yield put({
@@ -141,6 +145,7 @@ export default ({
             currentMagazine: res.data
           }
         });
+        yield call(getCashDeskByMagazineId, res.data.id)
       }
     },
 
@@ -188,7 +193,6 @@ export default ({
     },
 
     * addBalance({payload}, {call, put}) {
-      // payload.balance = payload.balance.replace(/\s+/g, '');
       const res = yield call(addBalance, payload);
       if (res.success) {
         yield put({
@@ -364,7 +368,7 @@ export default ({
         yield put({
           type: 'updateState',
           payload: {
-            cashDesksByMagazine: res.object
+            CurrentCashDesks: res.object
           }
         })
       }

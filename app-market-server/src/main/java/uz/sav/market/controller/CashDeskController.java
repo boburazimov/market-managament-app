@@ -52,9 +52,9 @@ public class CashDeskController {
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
-    @GetMapping("/byMagazine/{id}")
-    public HttpEntity<?> getCashDeskBy(@PathVariable UUID id) {
-        return ResponseEntity.ok(new ApiResponse("cashDesksByMagazine", true, cashDeskService.getCashDesksByMagazine(id))) ;
+    @GetMapping("/byMagazine")
+    public HttpEntity<?> getCashDeskBy(@RequestParam(value = "id", defaultValue = "") String id) {
+        return ResponseEntity.ok(new ApiResponse("cashDesksByMagazine", true, cashDeskService.getCashDesksByMagazine(UUID.fromString(id))));
     }
 
 }
