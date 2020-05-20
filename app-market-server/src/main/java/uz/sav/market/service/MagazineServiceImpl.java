@@ -53,8 +53,8 @@ public class MagazineServiceImpl implements MagazineService {
                 magazine.getId(),
                 magazine.getExternalCode(),
                 magazine.getName(),
-                magazine.getUser().getId(),
-                magazine.getUser().getPhoneNumber(),
+                magazine.getUser()==null?null: magazine.getUser().getId(),
+                magazine.getUser()==null?null:magazine.getUser().getPhoneNumber(),
                 magazine.getExtraInfo()
         );
     }
@@ -82,5 +82,10 @@ public class MagazineServiceImpl implements MagazineService {
         } catch (Exception e) {
             return new ApiResponse(e.getMessage(), false);
         }
+    }
+
+    @Override
+    public ResMagazine getMagazineByUser(Magazine magazine) {
+        return getMagazine(magazine);
     }
 }

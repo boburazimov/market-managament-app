@@ -19,4 +19,6 @@ public interface MagazineService {
     ResPageable getMagazines(int page, int size) throws BadRequestException;
 
     ApiResponse deleteMagazine(UUID id);
+
+    ResMagazine getMagazineByUser(Magazine magazine);
 }

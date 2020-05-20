@@ -8,6 +8,7 @@ import uz.sav.market.payload.ReqCashDesk;
 import uz.sav.market.payload.ResCashDesk;
 import uz.sav.market.payload.ResPageable;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CashDeskService {
@@ -19,4 +20,6 @@ public interface CashDeskService {
     ResPageable getCashDesks(int page, int size) throws BadRequestException;
 
     ApiResponse deleteCashDesk(UUID id);
+
+    List<ResCashDesk> getCashDesksByMagazine(UUID magazineId);
 }

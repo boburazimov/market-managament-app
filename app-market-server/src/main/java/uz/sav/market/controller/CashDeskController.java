@@ -51,4 +51,10 @@ public class CashDeskController {
         ApiResponse apiResponse = cashDeskService.deleteCashDesk(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
+
+    @GetMapping("/byMagazine/{id}")
+    public HttpEntity<?> getCashDeskBy(@PathVariable UUID id) {
+        return ResponseEntity.ok(new ApiResponse("cashDesksByMagazine", true, cashDeskService.getCashDesksByMagazine(id))) ;
+    }
+
 }
