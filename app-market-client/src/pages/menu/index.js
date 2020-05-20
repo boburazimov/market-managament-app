@@ -42,15 +42,15 @@ class Index extends Component {
           <Row className="card-header">
             <Col className="col-sm-12 col-md-4">
               <Label>Маркет</Label>
-              <h4 className="form-control bg-info text-light">H-055 Кора Камиш 2/4 120квм</h4>
+              <h4 className="form-control bg-yellow ">H-055 Кора Камиш 2/4 120квм</h4>
             </Col>
             <Col className="col-sm-12 col-md-3">
               <Label>Ответственный</Label>
-              <h4 className="form-control bg-info text-light">Бобур Азимов</h4>
+              <h4 className="form-control bg-yellow ">Бобур Азимов</h4>
             </Col>
             <Col className="col-sm-12 col-md-2">
               <Label>Контакты</Label>
-              <h4 className="form-control bg-info text-light">+99897 444 54 03</h4>
+              <h4 className="form-control bg-yellow">+99897 444 54 03</h4>
             </Col>
             <Col className="col-sm-12 justify-content-end col-md-2">
               <AvForm onValidSubmit={onHandleSubmit} model={defaultValue}>

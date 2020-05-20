@@ -59,7 +59,7 @@ class NavbarPanel extends Component {
                 <NavItem className="mr-md-3">
                   {!currentUser ?
                     <NavLink href="/login">Kirish</NavLink>
-                    : <Button className="btn-info" type="button" onClick={logOut}>Chiqish</Button>}
+                    : <Button className="btn-yellow" type="button" onClick={logOut}>Chiqish</Button>}
                 </NavItem>
               </Nav>
             </Collapse>
