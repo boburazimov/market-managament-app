@@ -5,6 +5,7 @@ import {connect} from "dva";
 import {STORAGE_NAME} from "../utils/constant";
 import {router} from "umi";
 import logo from "../../public/assets/images/logo.png"
+
 @connect(({app}) => ({app}))
 class NavbarPanel extends Component {
 
@@ -19,7 +20,7 @@ class NavbarPanel extends Component {
 
     const {isOpen} = this.state;
     const {app} = this.props;
-    const {currentUser, isAdmin} = app;
+    const {currentUser, isAdmin, isDirector} = app;
 
     const toggle = () => this.setState(!isOpen);
 
@@ -28,7 +29,10 @@ class NavbarPanel extends Component {
       this.props.dispatch({
         type: 'app/updateState',
         payload: {
-          currentUser: ''
+          currentUser: {},
+          isAdmin: false,
+          isCashier: false,
+          isDirector: false
         }
       });
       router.push("/login");
@@ -42,22 +46,23 @@ class NavbarPanel extends Component {
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
-                {isAdmin?<NavItem>
+                {Object.keys(currentUser).length > 0 ? <NavItem>
                   <NavLink href="/menu">Menu</NavLink>
-                </NavItem>:''}
-                <NavItem>
+                </NavItem> : ''}
+                {isDirector ? <NavItem>
                   <NavLink href="/report">Hibot</NavLink>
-                </NavItem>
-                <NavItem>
+                </NavItem> : ''}
+                {currentUser ?  <NavItem>
                   <NavLink href="/instruction">Yo'riqnoma</NavLink>
-                </NavItem>
-                <NavItem>
+                </NavItem> : ''}
+                {isAdmin ? <NavItem>
                   <NavLink href="/catalog/magazine">Catalog</NavLink>
-                </NavItem>
+                </NavItem> : ''}
+
               </Nav>
               <Nav className="ml-auto" navbar>
                 <NavItem className="mr-md-3">
-                  {!currentUser ?
+                  {!(Object.keys(currentUser).length > 0) ?
                     <NavLink href="/login">Kirish</NavLink>
                     : <Button className="btn-info" type="button" onClick={logOut}>Chiqish</Button>}
                 </NavItem>

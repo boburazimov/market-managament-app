@@ -15,8 +15,8 @@ export default function () {
   return (
     <div>
      <div className="banner">
-       <h1>Home Page</h1>
-       <Button onClick={fakeFetch}>Click Me</Button>
+       {/*<h1>Home Page</h1>*/}
+       {/*<Button onClick={fakeFetch}>Click Me</Button>*/}
        {spinner}
      </div>
     </div>

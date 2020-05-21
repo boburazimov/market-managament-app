@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("/userMe")
     public HttpEntity<?> userMe(@CurrentUser User user) {
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(new ApiResponse(true, user));
     }
 
     @GetMapping("/{id}")

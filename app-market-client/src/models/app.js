@@ -10,23 +10,23 @@ const {
 } = api;
 
 let openPages = ['/login', '/register', '/'];
-let userPages = ['/menu', '/register', '/', '/login',
-  '/catalog/magazine',
-  '/catalog/balance',
-  '/catalog/balance',
-  '/catalog/payType',
-  '/catalog/currency',
-  '/catalog/cashDesk',
-  '/catalog/cashBox',
-];
-let adminPages = ['/input', '/catalog'];
+// let userPages = ['/menu', '/register', '/', '/login', "/menu",
+//   // '/catalog/magazine',
+//   // '/catalog/balance',
+//   // '/catalog/balance',
+//   // '/catalog/payType',
+//   // '/catalog/currency',
+//   // '/catalog/cashDesk',
+//   // '/catalog/cashBox',
+// ];
+// let adminPages = ['/input', '/catalog'];
 
 export default ({
 
   namespace: 'app',
 
   state: {
-    currentUser: '',
+    currentUser: {},
     pathname: '',
     showModal: false,
     magazines: [],
@@ -42,6 +42,8 @@ export default ({
     CurrentCashDesks: [],
     currentMagazine: '',
     isAdmin: false,
+    isCashier: false,
+    isDirector: false,
   },
 
   subscriptions: {
@@ -62,28 +64,40 @@ export default ({
     * userMe({payload}, {call, put}) {
       try {
         const res = yield call(userMe);
+        console.log(res);
         if (!res.success) {
-          yield put({type: 'updateState', payload: {currentUser: ''}});
+          yield put({
+            type: 'updateState',
+            payload: {currentUser: {}}
+          });
           if (!openPages.includes(payload.pathname)) {
-            router.push("/");
+            router.push("/login");
           }
         } else {
           yield put({
             type: 'updateState',
             payload: {
-              currentUser: res,
-              isAdmin: res.roles.filter(item => item.name === 'ROLE_ADMIN').length
+              currentUser: res.object,
+              isAdmin: res.object.roles.length > 3,
+              isDirector: res.object.roles.length > 2,
+              isCashier: res.object.roles.length > 1,
             }
           });
-          if (res.roles.filter(item => item.name === 'ROLE_USER').length) {
-            if (!userPages.includes(payload.pathname)) {
-              router.push("/")
-            }
-          }
-          yield put({type: 'getMagazineByUser', payload: {id: res.id}});
+          // if (res.object.roles.filter(item => item.name === 'ROLE_USER').length) {
+          //   if (!userPages.includes(payload.pathname)) {
+          //     router.push("/")
+          //   }
+          // }
+          yield put({type: 'getMagazineByUser', payload: {id: res.object.id}});
         }
       } catch (e) {
-        toast.error(e.message)
+        yield put({
+          type: 'updateState',
+          payload: {currentUser: {}}
+        });
+        if (!openPages.includes(payload.pathname)) {
+          router.push("/login");
+        }
       }
     },
 
@@ -139,13 +153,17 @@ export default ({
     * getMagazineByUser({payload}, {call, put}) {
       const res = yield call(getMagazineByUser, payload);
       if (res.success) {
+        console.log(res);
         yield put({
           type: 'updateState',
           payload: {
-            currentMagazine: res.data
+            currentMagazine: res.object
           }
         });
-        yield call(getCashDeskByMagazineId, res.data.id)
+        yield put({
+          type: 'getCashDeskByMagazineId',
+          payload: {id: res.data.id}
+          })
       }
     },
 
