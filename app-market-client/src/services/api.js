@@ -3,7 +3,7 @@ export default {
   addMagazine: 'POST /magazine',
   getMagazines: '/magazine',
   deleteMagazine: 'DELETE /magazine',
-  getMagazineByUser: '/magazine/byUser',
+  getCashDeskBy: '/magazine/byUser',
 
   addCurrency: 'POST /currency',
   getCurrency: '/currency',
@@ -27,7 +27,6 @@ export default {
   addCashDesk: 'POST /cashDesk',
   getCashDesks: '/cashDesk',
   deleteCashDesk: 'DELETE /cashDesk',
-  getCashDeskByMagazineId: ' /cashDesk/byMagazine',
 
   userMe: '/user/userMe',
   getStatusEnums: '/status',

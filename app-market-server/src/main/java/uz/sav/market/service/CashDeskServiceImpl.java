@@ -20,8 +20,10 @@ import uz.sav.market.repository.rest.MBalanceRepository;
 import uz.sav.market.utils.CommonUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CashDeskServiceImpl implements CashDeskService {
@@ -56,13 +58,12 @@ public class CashDeskServiceImpl implements CashDeskService {
     @Override
     public ResCashDesk getCashDesk(CashDesk cashDesk) {
 
-        assert cashDesk.getMagazine() != null;
         return new ResCashDesk(
                 cashDesk.getId(),
                 cashDesk.getExternalCode(),
                 cashDesk.getName(),
                 cashDesk.getMagazine() == null ? null : cashDesk.getMagazine().getId(),
-                cashDesk.getMagazine().getName(),
+                cashDesk.getMagazine() == null ? null : cashDesk.getMagazine().getName(),
                 cashDesk.getBalance().getId(),
                 cashDesk.getBalance().getBalanceValue(),
                 cashDesk.getExtraInfo(),
@@ -96,9 +97,9 @@ public class CashDeskServiceImpl implements CashDeskService {
     }
 
     @Override
-    public List<ResCashDesk> getCashDesksByMagazine(UUID magazineId) {
-        List<CashDesk> byMagazineAndAndStatusEnum = cashDeskRepository.findAllByMagazineIdAndAndStatusEnum(magazineId, StatusEnum.ACTIVE);
-        return byMagazineAndAndStatusEnum.stream().map(this::getCashDesk).collect(Collectors.toList());
+    public List<ResCashDesk> getByMagazine(UUID magazineId) {
+        List<CashDesk> allByMagazineIdAndStatusEnum = cashDeskRepository.findAllByMagazineIdAndStatusEnum(magazineId, StatusEnum.ACTIVE);
+        return allByMagazineIdAndStatusEnum.stream().map(this::getCashDesk).collect(Collectors.toList());
 
     }
 }

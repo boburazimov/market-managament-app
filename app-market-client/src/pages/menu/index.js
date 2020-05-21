@@ -6,10 +6,24 @@ import {AvForm, AvGroup, AvInput} from "availity-reactstrap-validation";
 @connect(({app}) => ({app}))
 class Index extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      nachSaldo: '',
+      chistiyUzs: '',
+    }
+  }
+
   componentDidMount() {
-    const {dispatch} = this.props;
-    // dispatch({type: 'app/getMagazineByUser'});
-    // dispatch({type: 'app/getCashDeskByMagazineId'});
+    let countNachSaldo = 0;
+    const {currentCashDesks} = this.props.app;
+    // eslint-disable-next-line array-callback-return
+    currentCashDesks.map(item => {
+      countNachSaldo += item.balanceValue;
+    })
+    this.setState({
+      nachSaldo: countNachSaldo
+    })
   }
 
   render() {
@@ -18,11 +32,11 @@ class Index extends Component {
       required: {value: true},
       number: true,
       maxLength: {value: 11},
-
     };
 
-    const {dispatch, app} = this.props;
-    const {currentUser, cashDesks, currentMagazine} = app;
+    const {app} = this.props;
+    const {nachSaldo} = this.state;
+    const {currentCashDesks} = app;
 
     const defaultValue = {};
 
@@ -77,8 +91,8 @@ class Index extends Component {
                   <th width="1%">#</th>
                   <th width="25%" className="headTitle">КАССИР</th>
                   <th width="15%">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
-                    <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
+                  {currentCashDesks ? currentCashDesks.map(item =>
+                    <th key={item.id} width="15%">{item.name.slice(0, 7)}</th>
                   ) : ''}
                 </tr>
                 </thead>
@@ -88,27 +102,43 @@ class Index extends Component {
                   <th className="desc-text">Сальдо на начало</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="text" id="nachSaldoMarket" name="nachSaldoMarket"
-                               readOnly/>
+                      <AvInput value={nachSaldo}
+                               className="text-right"
+                               type="number"
+                               id="nachSaldo"
+                               name="nachSaldo"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-                  {cashDesks ? cashDesks.map(item =>
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <td key={item.id}>
                       <AvGroup className="input-field">
-                        <AvInput value={item.balanceValue} className="text-right" type="number" id="na" name="balanceValue"
-                                 placeholder="0.00"/>
+                        <AvInput
+                          value={item.balanceValue}
+                          className="text-right"
+                          type="number"
+                          id="na"
+                          name="balanceValue"
+                          placeholder="0.00"
+                          readOnly
+                        />
                       </AvGroup>
                     </td>
                   ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">2</th>
-                  <th className="desc-text">Чистый UZ</th>
+                  <th className="desc-text">Чистый UZS</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput value={nachSaldo}
+                               className="text-right"
+                               type="number"
+                               id="nachSaldo"
+                               name="nachSaldo"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
                   <td>
@@ -285,7 +315,7 @@ class Index extends Component {
                   <th width="5px">#</th>
                   <th width="200px" className="headTitle">ARTIX</th>
                   <th width="170px">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
                   ) : ''}
                 </tr>
@@ -500,7 +530,8 @@ class Index extends Component {
                   <th width="5px">#</th>
                   <th width="200px" className="headTitle">СВЕРКА</th>
                   <th width="170px">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
+
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
                   ) : ''}
                 </tr>
@@ -719,10 +750,5 @@ class Index extends Component {
     );
   }
 }
-
-// <Col className="col-sm-12 col-md-3">Итого</Col>
-// {cashDesks ? cashDesks.map(item =>
-//   <Col className="col-sm-12 col-md-3" key={item.id} value={item.id}>{item.name}</Col>
-// ) : ''}
 
 export default Index;

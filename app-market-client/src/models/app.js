@@ -6,19 +6,19 @@ const {
   userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine, getMagazineByUser,
   addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes,
   deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox,
-  addCashDesk, getCashDesks, deleteCashDesk, getCashDeskByMagazineId,
+  addCashDesk, getCashDesks, deleteCashDesk, getCashDeskBy,
 } = api;
 
 let openPages = ['/login', '/register', '/'];
-// let userPages = ['/menu', '/register', '/', '/login', "/menu",
-//   // '/catalog/magazine',
-//   // '/catalog/balance',
-//   // '/catalog/balance',
-//   // '/catalog/payType',
-//   // '/catalog/currency',
-//   // '/catalog/cashDesk',
-//   // '/catalog/cashBox',
-// ];
+let userPages = ['/menu', '/register', '/', '/login',
+  // '/catalog/magazine',
+  // '/catalog/balance',
+  // '/catalog/balance',
+  // '/catalog/payType',
+  // '/catalog/currency',
+  // '/catalog/cashDesk',
+  // '/catalog/cashBox',
+];
 // let adminPages = ['/input', '/catalog'];
 
 export default ({
@@ -39,7 +39,7 @@ export default ({
     cashBoxes: [],
     cashDesks: [],
     marketBalance: '',
-    CurrentCashDesks: [],
+    currentCashDesks: [],
     currentMagazine: '',
     isAdmin: false,
     isCashier: false,
@@ -64,7 +64,6 @@ export default ({
     * userMe({payload}, {call, put}) {
       try {
         const res = yield call(userMe);
-        console.log(res);
         if (!res.success) {
           yield put({
             type: 'updateState',
@@ -83,12 +82,15 @@ export default ({
               isCashier: res.object.roles.length > 1,
             }
           });
-          // if (res.object.roles.filter(item => item.name === 'ROLE_USER').length) {
-          //   if (!userPages.includes(payload.pathname)) {
-          //     router.push("/")
-          //   }
-          // }
-          yield put({type: 'getMagazineByUser', payload: {id: res.object.id}});
+          if (res.object.roles.filter(item => item.name === 'ROLE_USER').length) {
+            if (!userPages.includes(payload.pathname)) {
+              router.push("/")
+            }
+          }
+          yield put({
+            type: 'getCashDeskBy',
+            payload: {id: res.object.id}
+          })
         }
       } catch (e) {
         yield put({
@@ -147,23 +149,6 @@ export default ({
       } else {
         toast.error('Ошибка при удалении!');
         yield put({type: 'getMagazines'});
-      }
-    },
-
-    * getMagazineByUser({payload}, {call, put}) {
-      const res = yield call(getMagazineByUser, payload);
-      if (res.success) {
-        console.log(res);
-        yield put({
-          type: 'updateState',
-          payload: {
-            currentMagazine: res.object
-          }
-        });
-        yield put({
-          type: 'getCashDeskByMagazineId',
-          payload: {id: res.data.id}
-          })
       }
     },
 
@@ -379,14 +364,13 @@ export default ({
       }
     },
 
-    * getCashDeskByMagazineId({payload}, {call, put}) {
-      const res = yield call(getCashDeskByMagazineId, payload);
+    * getCashDeskBy({payload}, {call, put}) {
+      const res = yield call(getCashDeskBy, payload);
       if (res.success) {
-        console.log(res);
         yield put({
           type: 'updateState',
           payload: {
-            CurrentCashDesks: res.object
+            currentCashDesks: res.object
           }
         })
       }
