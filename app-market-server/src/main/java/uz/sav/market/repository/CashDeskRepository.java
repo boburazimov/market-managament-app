@@ -7,9 +7,10 @@ import uz.sav.market.entity.catalogs.CashDesk;
 import uz.sav.market.entity.enums.StatusEnum;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CashDeskRepository extends JpaRepository<CashDesk, UUID> {
 
-    List<CashDesk> findAllByMagazineIdAndAndStatusEnum(UUID magazineId, StatusEnum statusEnum);
+    List<CashDesk> findAllByMagazineIdAndStatusEnum(UUID magazineId, StatusEnum statusEnum);
 }

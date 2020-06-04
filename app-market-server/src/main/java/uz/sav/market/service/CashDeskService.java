@@ -21,5 +21,5 @@ public interface CashDeskService {
 
     ApiResponse deleteCashDesk(UUID id);
 
-    List<ResCashDesk> getCashDesksByMagazine(UUID magazineId);
+    List<ResCashDesk> getByMagazine(UUID magazineId);
 }

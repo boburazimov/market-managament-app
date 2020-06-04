@@ -6,10 +6,62 @@ import {AvForm, AvGroup, AvInput} from "availity-reactstrap-validation";
 @connect(({app}) => ({app}))
 class Index extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalClearUzs: '',
+      calculateValues: [
+        {
+          id: 1, startBalance1: 0, clearUzs1: 0, clearUzk1: 0, onlineCard1: 0, unionPayCard1: 0, humoCard1: 0,
+          artixUzs1: 0, accumFail1: 0, artixUzk1: 0, artixReturn1: 0, differUzs1: 0, differUzk1: 0, collectMoney1: 0,
+          endBalance1: 0
+        },
+        {
+          id: 2, startBalance2: 0, clearUzs2: 0, clearUzk2: 0, onlineCard2: 0, unionPayCard2: 0, humoCard2: 0,
+          artixUzs2: 0, accumFail2: 0, artixUzk2: 0, artixReturn2: 0, differUzs2: 0, differUzk2: 0, collectMoney2: 0,
+          endBalance2: 0
+        },
+        {
+          id: 3, startBalance3: 0, clearUzs3: 0, clearUzk3: 0, onlineCard3: 0, unionPayCard3: 0, humoCard3: 0,
+          artixUzs3: 0, accumFail3: 0, artixUzk3: 0, artixReturn3: 0, differUzs3: 0, differUzk3: 0, collectMoney3: 0,
+          endBalance3: 0
+        }
+      ],
+      checkOuts: [
+        {
+          id: 1, onlineCard1: 0, unionPayCard1: 0, humoCard1: 0, accumFail1: 0, differUzk1: 0, collectMoney1: 0,
+          endBalance1: 0
+        },
+        {
+          id: 2, onlineCard2: 0, unionPayCard2: 0, humoCard2: 0, accumFail2: 0, differUzk2: 0, collectMoney2: 0,
+          endBalance2: 0
+        },
+        {
+          id: 3, onlineCard3: 0, unionPayCard3: 0, humoCard3: 0, accumFail3: 0, differUzk3: 0, collectMoney3: 0,
+          endBalance3: 0
+        }
+      ],
+      returnCheck: [],
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.onBlurHandler = this.onBlurHandler.bind(this);
+  }
+
   componentDidMount() {
-    const {dispatch} = this.props;
-    // dispatch({type: 'app/getMagazineByUser'});
-    // dispatch({type: 'app/getCashDeskByMagazineId'});
+    const {app} = this.props;
+    const {currentCashDesks} = app;
+    if (currentCashDesks)
+      this.setState({})
+  }
+
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  onBlurHandler(e, v) {
+
   }
 
   render() {
@@ -18,17 +70,19 @@ class Index extends Component {
       required: {value: true},
       number: true,
       maxLength: {value: 11},
-
     };
 
-    const {dispatch, app} = this.props;
-    const {currentUser, cashDesks, currentMagazine} = app;
-
-    const defaultValue = {};
+    const {app} = this.props;
+    const {nachSaldo, totalClearUzs} = this.state;
+    const {currentCashDesks} = app;
 
     const onHandleSubmit = (e, v) => {
       console.log(v);
     };
+
+    const calculateRows = (values) => {
+      console.log(values);
+    }
 
     return (
       <div className="col-lg-12 col-sm-12">
@@ -53,7 +107,7 @@ class Index extends Component {
               <h4 className="form-control bg-yellow">+99897 444 54 03</h4>
             </Col>
             <Col className="col-sm-12 justify-content-end col-md-2">
-              <AvForm onValidSubmit={onHandleSubmit} model={defaultValue}>
+              <AvForm onValidSubmit={onHandleSubmit} defaultValue={new Date()}>
                 <AvGroup>
                   <Label for="checkDate">Дата</Label>
                   <AvInput type="date" id="checkDate" name="checkDate"
@@ -77,8 +131,8 @@ class Index extends Component {
                   <th width="1%">#</th>
                   <th width="25%" className="headTitle">КАССИР</th>
                   <th width="15%">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
-                    <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
+                  {currentCashDesks ? currentCashDesks.map(item =>
+                    <th key={item.id} width="15%">{item.name.slice(0, 7)}</th>
                   ) : ''}
                 </tr>
                 </thead>
@@ -88,61 +142,63 @@ class Index extends Component {
                   <th className="desc-text">Сальдо на начало</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="text" id="nachSaldoMarket" name="nachSaldoMarket"
-                               readOnly/>
+                      <AvInput value={nachSaldo}
+                               className="text-right"
+                               type="number"
+                               id="nachSaldo"
+                               name="nachSaldo"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-                  {cashDesks ? cashDesks.map(item =>
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <td key={item.id}>
                       <AvGroup className="input-field">
-                        <AvInput value={item.balanceValue} className="text-right" type="number" id="na" name="balanceValue"
-                                 placeholder="0.00"/>
+                        <AvInput
+                          value={item.balanceValue}
+                          className="text-right"
+                          type="number"
+                          id="na"
+                          name="balanceValue"
+                          placeholder="0.00"
+                          readOnly
+                        />
                       </AvGroup>
                     </td>
                   ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">2</th>
-                  <th className="desc-text">Чистый UZ</th>
+                  <th className="desc-text">Чистый UZS</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput
+                        value={calculateRows(['clearUzs1','clearUzs2','clearUzs3'])}
+                        className="text-right"
+                        type="number"
+                        id="totalClearUzs"
+                        name="totalClearUzs"
+                        readOnly
+                      />
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 type="number"
+                                 id={`clearUzs${i}`}
+                                 name={`clearUzs/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Чистый за день UZS</th>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
                   <td>
                     <AvGroup className="input-field">
                       <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
@@ -161,20 +217,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -186,20 +229,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -211,20 +241,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -236,20 +253,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -261,20 +265,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 </tbody>
                 {/*КАССИР БЛОК - Конец*/}
@@ -285,7 +276,7 @@ class Index extends Component {
                   <th width="5px">#</th>
                   <th width="200px" className="headTitle">ARTIX</th>
                   <th width="170px">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
                   ) : ''}
                 </tr>
@@ -301,20 +292,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">2</th>
@@ -326,20 +304,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -351,20 +316,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -376,20 +328,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -401,20 +340,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -426,20 +352,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -451,20 +364,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -476,20 +376,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 </tbody>
                 {/*ARTIX БЛОК - Конец*/}
@@ -500,7 +387,8 @@ class Index extends Component {
                   <th width="5px">#</th>
                   <th width="200px" className="headTitle">СВЕРКА</th>
                   <th width="170px">Итоги</th>
-                  {cashDesks ? cashDesks.map(item =>
+
+                  {currentCashDesks ? currentCashDesks.map(item =>
                     <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
                   ) : ''}
                 </tr>
@@ -516,20 +404,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">2</th>
@@ -541,20 +416,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -566,20 +428,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -591,20 +440,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -616,20 +452,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -641,20 +464,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -666,20 +476,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 <tr>
                   <th scope="row">3</th>
@@ -691,20 +488,7 @@ class Index extends Component {
                                placeholder="0.00"/>
                     </AvGroup>
                   </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
-                    </AvGroup>
-                  </td>
+
                 </tr>
                 </tbody>
                 {/*БЛОК СВЕРКА - Конец*/}
@@ -719,10 +503,5 @@ class Index extends Component {
     );
   }
 }
-
-// <Col className="col-sm-12 col-md-3">Итого</Col>
-// {cashDesks ? cashDesks.map(item =>
-//   <Col className="col-sm-12 col-md-3" key={item.id} value={item.id}>{item.name}</Col>
-// ) : ''}
 
 export default Index;

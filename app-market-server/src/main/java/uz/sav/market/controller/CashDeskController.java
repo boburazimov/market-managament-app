@@ -13,6 +13,7 @@ import uz.sav.market.exception.BadRequestException;
 import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqCashDesk;
 import uz.sav.market.repository.CashDeskRepository;
+import uz.sav.market.repository.UserRepository;
 import uz.sav.market.security.CurrentUser;
 import uz.sav.market.service.CashDeskService;
 import uz.sav.market.utils.AppConstants;
@@ -27,6 +28,8 @@ public class CashDeskController {
     CashDeskService cashDeskService;
     @Autowired
     CashDeskRepository cashDeskRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping
     public HttpEntity<?> addCashDesk(@RequestBody ReqCashDesk cashDesk, @CurrentUser User user) {
@@ -52,9 +55,26 @@ public class CashDeskController {
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
-    @GetMapping("/byMagazine/{id}")
-    public HttpEntity<?> getCashDeskBy(@PathVariable UUID id) {
-        return ResponseEntity.ok(new ApiResponse("cashDesksByMagazine", true, cashDeskService.getCashDesksByMagazine(id))) ;
-    }
+//    @GetMapping("/byMagazine")
+//    public HttpEntity<?> getCashDeskBy(@RequestParam(value = "id", defaultValue = "0d272750-706b-4135-ab81-0fce3db514f9") String id) {
+//        System.out.println(id);
+////        List<CashDesk> cashDesks = Collections.singletonList(new CashDesk());
+////        if (id.isEmpty())
+////            cashDesks = Collections.singletonList(cashDeskRepository.findAllByMagazineIdAndStatusEnum(
+////                    UUID.fromString(id),
+////                    StatusEnum.ACTIVE
+////            ).orElseGet(CashDesk::new));
+//        return ResponseEntity.ok(new ApiResponse("Получены кассы ККМ по маркету", true, cashDeskService.getCashDesksByMagazine(UUID.fromString(id))));
+//    }
 
+//    @GetMapping("/byMagazine")
+//    public HttpEntity<?> getCashDeskBy(UUID magazineId) {
+//        return ResponseEntity.ok(
+//                new ApiResponse(
+//                        "Получены кассы ККМ по маркету",
+//                        true,
+//                        cashDeskService.getCashDesksByMagazine(magazineId)
+//                )
+//        );
+//    }
 }

@@ -14,10 +14,10 @@ import uz.sav.market.payload.ApiResponse;
 import uz.sav.market.payload.ReqMagazine;
 import uz.sav.market.repository.MagazineRepository;
 import uz.sav.market.security.CurrentUser;
+import uz.sav.market.service.CashDeskService;
 import uz.sav.market.service.MagazineService;
 import uz.sav.market.utils.AppConstants;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -28,6 +28,8 @@ public class MagazineController {
     MagazineService magazineService;
     @Autowired
     MagazineRepository magazineRepository;
+    @Autowired
+    CashDeskService cashDeskService;
 
     @PostMapping
     public HttpEntity<?> addMagazine(@RequestBody ReqMagazine reqMagazine, @CurrentUser User user) {
@@ -54,10 +56,13 @@ public class MagazineController {
     }
 
     @GetMapping("/byUser")
-    public HttpEntity<?> getMagazineBy(@RequestParam(value = "id", defaultValue = "") String id) {
+    public HttpEntity<?> getMagazineAndCashDesks(@RequestParam(value = "id", defaultValue = "") String id) {
         Magazine magazine = new Magazine();
         if (!id.isEmpty())
             magazine = magazineRepository.findByUserId(UUID.fromString(id)).orElseGet(Magazine::new);
-        return ResponseEntity.ok(new ApiResponse("Получен магазин по пользователю", true, magazineService.getMagazine(magazine)));
+        return ResponseEntity.ok(new ApiResponse(
+                "Получены кассы ККМ по маркету",
+                true,
+                cashDeskService.getByMagazine(magazine.getId())));
     }
 }
