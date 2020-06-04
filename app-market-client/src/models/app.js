@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import router from "umi/router";
 
 const {
-  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine, getMagazineByUser,
+  userMe, getCurrencies, getStatusEnums, addMagazine, getMagazines, getUsers, deleteMagazine,
   addCurrency, deleteCurrency, addBalance, getBalances, deleteBalance, addPayType, getPayTypes,
   deletePayType, getPayMethodEnums, addCashBox, getCashBoxes, deleteCashBox,
   addCashDesk, getCashDesks, deleteCashDesk, getCashDeskBy,
