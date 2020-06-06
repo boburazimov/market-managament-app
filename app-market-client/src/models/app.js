@@ -10,14 +10,14 @@ const {
 } = api;
 
 let openPages = ['/login', '/register', '/'];
-let userPages = ['/menu', '/register', '/', '/login',
-  // '/catalog/magazine',
-  // '/catalog/balance',
-  // '/catalog/balance',
-  // '/catalog/payType',
-  // '/catalog/currency',
-  // '/catalog/cashDesk',
-  // '/catalog/cashBox',
+let userPages = ['/menu', '/menu/kassa', '/register', '/', '/login',
+  '/catalog/magazine',
+  '/catalog/balance',
+  '/catalog/balance',
+  '/catalog/payType',
+  '/catalog/currency',
+  '/catalog/cashDesk',
+  '/catalog/cashBox',
 ];
 // let adminPages = ['/input', '/catalog'];
 
