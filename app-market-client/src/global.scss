@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
 body {
   &::-webkit-scrollbar {
     width: 7px;
@@ -413,14 +414,17 @@ input[type=number] {
 .navbar {
   background: #fff !important;
   padding-bottom: 0;
-  .container{
+
+  .container {
     border-bottom: 1px solid #202020;
 
   }
+
   a {
     color: #202020 !important;
     transition: all 0.3s;
     font-weight: 500;
+
     &:hover {
       color: #F6DE00 !important;
       transition: all 0.3s;
@@ -435,40 +439,60 @@ input[type=number] {
     }
   }
 }
-.bg-yellow{
+
+.bg-yellow {
   background-color: #FFE200;
 }
-.btn-yellow{
+
+.btn-yellow {
   @extend .bg-yellow;
   border-color: #F6DE00;
   color: #000;
-  &:hover{
+
+  &:hover {
     background-color: #007130;
   }
 }
-.menuPage{
+
+.menuPage {
   background-position: center center;
   background-repeat: repeat;
   background-size: cover;
   color: #202020;
-  .title{
+
+  .title {
 
   }
-  .cards{
+
+  .cards {
     padding: 20px;
-    .cards-header{
+
+    .cards-header {
       padding: 15px;
     }
-    .cards-title{
-      a{
+
+    a {
+      transition: all 0.5s;
+      &:hover {
+        transition: all 0.5s;
+        transform: scale(0.95);
+      }
+    }
+
+    .cards-title {
+      a {
         display: inline;
         padding: 0;
-        &:hover{
-          text-decoration: #202020 solid;
-          h2{
-         }
+
+
+        &:hover {
+          text-decoration: #F6DE00 solid;
+          h2 {
+            color: #F6DE00;
+          }
         }
-        h2{
+
+        h2 {
           display: inline;
           font-size: 20px;
           color: #202020;

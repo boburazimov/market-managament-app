@@ -32,6 +32,18 @@ class Index extends Component {
                 </div>
               </div>
             </div>
+            <div className="col-3">
+              <div className="cards">
+                <div className="cards-header">
+                  <NavLink href="/menu/kassa"><img src="https://www.flaticon.com/premium-icon/icons/svg/2545/2545880.svg" className="card-img-top img-fluid" alt=""/></NavLink>
+                </div>
+                <div className="cards-body">
+                  <div className="cards-title text-center">
+                    <NavLink href="/menu/kassa"> <h2>Return</h2></NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
