@@ -3,9 +3,13 @@ package uz.sav.market.payload;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.sav.market.entity.catalogs.CashDesk;
 import uz.sav.market.entity.catalogs.Magazine;
 
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,33 +19,35 @@ public class ReqCheckout {
     // KASSA
     private String code;
 
+    private UUID cashDeskId;
+
     private Date checkoutDate;
 
-    private Magazine magazine;
+    private Double clearUzs;
 
-    private Double salesOfDate;
+    private Double clearUzk;
 
-    private Double encashment;
+    private Double onlineCard;
+    private Double unionPayCard;
+    private Double humoCard;
+
+    private Double accumFail;
 
     // ARTIX
-    private Double artixSalesUzs;
+    private Double artixUzs;
 
-    private Double artixSalesUzk;
+    private Double artixUzk;
 
-    private Double returnCkeck;
-
-    private Double netArtixSalesUzs;
-
-    private Double netArtixSalesUzk;
-
-    private Double totalArtixSales;
+    private Double artixReturn;
 
     // CHEKING
-    private Double differenceUzs;
+    private Double differUzs;
 
-    private Double differenceUzk;
+    private Double differUzk;
 
-    private Double correction;
+    private Double collectMoney;
+
+    private Double endBalance;
 
     private String extraInfo;
 }

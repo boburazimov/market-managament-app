@@ -19,6 +19,7 @@ import uz.sav.market.service.AuthService;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
     AuthService authService;
     @Autowired

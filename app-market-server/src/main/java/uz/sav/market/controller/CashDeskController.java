@@ -54,27 +54,4 @@ public class CashDeskController {
         ApiResponse apiResponse = cashDeskService.deleteCashDesk(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
-
-//    @GetMapping("/byMagazine")
-//    public HttpEntity<?> getCashDeskBy(@RequestParam(value = "id", defaultValue = "0d272750-706b-4135-ab81-0fce3db514f9") String id) {
-//        System.out.println(id);
-////        List<CashDesk> cashDesks = Collections.singletonList(new CashDesk());
-////        if (id.isEmpty())
-////            cashDesks = Collections.singletonList(cashDeskRepository.findAllByMagazineIdAndStatusEnum(
-////                    UUID.fromString(id),
-////                    StatusEnum.ACTIVE
-////            ).orElseGet(CashDesk::new));
-//        return ResponseEntity.ok(new ApiResponse("Получены кассы ККМ по маркету", true, cashDeskService.getCashDesksByMagazine(UUID.fromString(id))));
-//    }
-
-//    @GetMapping("/byMagazine")
-//    public HttpEntity<?> getCashDeskBy(UUID magazineId) {
-//        return ResponseEntity.ok(
-//                new ApiResponse(
-//                        "Получены кассы ККМ по маркету",
-//                        true,
-//                        cashDeskService.getCashDesksByMagazine(magazineId)
-//                )
-//        );
-//    }
 }

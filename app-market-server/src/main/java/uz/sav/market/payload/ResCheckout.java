@@ -15,35 +15,37 @@ public class ResCheckout {
     // KASSA
     private String code;
 
+    private UUID cashDeskId;
+
+    private String cashDeskName;
+
     private Date checkoutDate;
 
-    private UUID magazineId;
+    private Double clearUzs;
 
-    private String magazineName;
+    private Double clearUzk;
 
-    private Double salesOfDate;
+    private Double onlineCard;
+    private Double unionPayCard;
+    private Double humoCard;
 
-    private Double encashment;
+    private Double accumFail;
 
     // ARTIX
-    private Double artixSalesUzs;
+    private Double artixUzs;
 
-    private Double artixSalesUzk;
+    private Double artixUzk;
 
-    private Double returnCkeck;
-
-    private Double netArtixSalesUzs;
-
-    private Double netArtixSalesUzk;
-
-    private Double totalArtixSales;
+    private Double artixReturn;
 
     // CHEKING
-    private Double differenceUzs;
+    private Double differUzs;
 
-    private Double differenceUzk;
+    private Double differUzk;
 
-    private Double correction;
+    private Double collectMoney;
+
+    private Double endBalance;
 
     private String extraInfo;
 }

@@ -50,7 +50,7 @@ class NavbarPanel extends Component {
                   <NavLink href="/menu">Menu</NavLink>
                 </NavItem> : ''}
                 {isDirector ? <NavItem>
-                  <NavLink href="/report">Hibot</NavLink>
+                  <NavLink href="/report">Hisobot</NavLink>
                 </NavItem> : ''}
                 {currentUser ?  <NavItem>
                   <NavLink href="/instruction">Yo'riqnoma</NavLink>

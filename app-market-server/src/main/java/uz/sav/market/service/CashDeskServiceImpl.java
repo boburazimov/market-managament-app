@@ -20,10 +20,8 @@ import uz.sav.market.repository.rest.MBalanceRepository;
 import uz.sav.market.utils.CommonUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class CashDeskServiceImpl implements CashDeskService {
