@@ -9,150 +9,90 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startSaldo:0,
-      totalClearUzs: '',
-      calculateValues: [
-        // {
-        //   id: 1, startBalance1: 5000, clearUzs1: 0, clearUzk1: 0, onlineCard1: 0, unionPayCard1: 0, humoCard1: 0,
-        //   artixUzs1: 0, accumFail1: 0, artixUzk1: 0, artixReturn1: 0, differUzs1: 0, differUzk1: 0, collectMoney1: 0,
-        //   endBalance1: 0
-        // },
-        // {
-        //   id: 2, startBalance2: 0, clearUzs2: 0, clearUzk2: 0, onlineCard2: 0, unionPayCard2: 0, humoCard2: 0,
-        //   artixUzs2: 0, accumFail2: 0, artixUzk2: 0, artixReturn2: 0, differUzs2: 0, differUzk2: 0, collectMoney2: 0,
-        //   endBalance2: 0
-        // },
-        // {
-        //   id: 3, startBalance3: 0, clearUzs3: 0, clearUzk3: 0, onlineCard3: 0, unionPayCard3: 0, humoCard3: 0,
-        //   artixUzs3: 0, accumFail3: 0, artixUzk3: 0, artixReturn3: 0, differUzs3: 0, differUzk3: 0, collectMoney3: 0,
-        //   endBalance3: 0
-        // }
-      ],
-      checkOuts: [
-        // {
-        //   id: 1, onlineCard1: 0, unionPayCard1: 0, humoCard1: 0, accumFail1: 0, differUzk1: 0, collectMoney1: 0,
-        //   endBalance1: 0
-        // },
-        // {
-        //   id: 2, onlineCard2: 0, unionPayCard2: 0, humoCard2: 0, accumFail2: 0, differUzk2: 0, collectMoney2: 0,
-        //   endBalance2: 0
-        // },
-        // {
-        //   id: 3, onlineCard3: 0, unionPayCard3: 0, humoCard3: 0, accumFail3: 0, differUzk3: 0, collectMoney3: 0,
-        //   endBalance3: 0
-        // }
-      ],
-      returnCheck: [],
-      result:{
+      checkOuts: [],
+      result: {
         clearUzs: 0,
         clearUzk: 0,
         onlineCard: 0,
         unionPayCard: 0,
         humoCard: 0,
-        totalFail: 0,
+        accumFail: 0,
+
+        artixUzs: 0,
+        artixUzk: 0,
+        artixReturn: 0,
       },
-      onlineP:[],
-      humoP:[],
-      paymeP:[],
-      clearUzkP:[]
+      onlineP: [],
+      humoP: [],
+      unionP: [],
+      clearUzkP: []
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
   }
 
-  componentDidMount() {
+  handleChange(e) {
+  }
+
+  onBlurHandler(e) {
     const {app} = this.props;
     const {currentCashDesks} = app;
 
-    let onlineP = [], humoP = [], paymeP = [], clearUzkP=[];
+    let val = 0;
+    let name = e.target.name.split('/')[0];
+    let index = e.target.name.split('/')[1];
+
     for (let i = 0; i < currentCashDesks.length; i++) {
-      onlineP[i]=0.0;
-      humoP[i]=0.00;
-      paymeP[i]=0.00;
-      clearUzkP[i]=0.00;
+
+      console.log(document.getElementsByName(name + '/' + i)[0].value)
+      console.log(name)
+
+      if (document.getElementsByName(name + '/' + i)[0].value === '')
+        document.getElementsByName(name + '/' + i)[0].value = 0.00;
+      val += parseFloat(document.getElementsByName(name + '/' + i)[0].value);
     }
 
+    let result = this.state.result;
+    result[name] = val;
+
+    let clearUzkP = this.state.clearUzkP;
+    let onlineP = this.state.onlineP;
+    let unionP = this.state.unionP;
+    let humoP = this.state.humoP;
+
+
+    if (name.startsWith('onlineCard')) {
+      onlineP[index] = parseFloat(document.getElementsByName(name + '/' + index)[0].value);
+    } else if (name.startsWith('unionPayCard')) {
+      unionP[index] = parseFloat(document.getElementsByName(name + '/' + index)[0].value);
+    } else if (name.startsWith('humoCard')) {
+      humoP[index] = parseFloat(document.getElementsByName(name + '/' + index)[0].value);
+    }
+
+    let clearUzk = 0;
+    for (let i = 0; i < currentCashDesks.length; i++) {
+      clearUzkP[i] = (onlineP[i] ? onlineP[i] : 0) + (unionP[i] ? unionP[i] : 0) + (humoP[i] ? humoP[i] : 0);
+      clearUzk += clearUzkP[i];
+    }
+    result.clearUzk = clearUzk;
+
     this.setState({
+      result,
       onlineP,
+      unionP,
       humoP,
-      paymeP,
       clearUzkP
     })
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  onBlurHandler(e, v) {
-    // console.log(e.target.id);
-    // console.log(v);
-
+  onHandleSubmit(e) {
   }
 
   render() {
-
-    const validateProps = {
-      required: {value: true},
-      number: true,
-      maxLength: {value: 11},
-    };
-
     const {app} = this.props;
     const {currentCashDesks, currentUser} = app;
-
-    const onHandleSubmit = (e, v) => {
-    };
-
-    const onChangeFields = (e) => {
-      let val = 0;
-      let name = e.target.name.split('/')[0];
-      let index = e.target.name.split('/')[1];
-      for (let i = 0; i < currentCashDesks.length; i++){
-        console.log(document.getElementsByName(name + '/' + i)[0].value);
-        console.log(typeof document.getElementsByName(name + '/' + i)[0].value);
-        if(document.getElementsByName(name+'/'+i)[0].value === '')
-          document.getElementsByName(name+'/'+i)[0].value=0.00;
-        val+=parseFloat(document.getElementsByName(name+'/'+i)[0].value);
-      }
-      console.log(val);
-      console.log(name);
-      let oldResult=this.state.result;
-      oldResult[name] = val;
-
-      let clearUzkP = this.state.clearUzkP;  //onlineCard, unionPayCard, humoCard
-      let onlineP = this.state.onlineP;  //onlineCard, unionPayCard, humoCard
-      let humoP = this.state.humoP;  //onlineCard, unionPayCard, humoCard
-      let paymeP = this.state.paymeP;  //onlineCard, unionPayCard, humoCard
-
-
-      if(name.startsWith('onlineCard')){
-        onlineP[index] = parseFloat(document.getElementsByName(name+'/'+index)[0].value);
-      } else if(name.startsWith('unionPayCard')){
-        paymeP[index] = parseFloat(document.getElementsByName(name+'/'+index)[0].value);
-      } else if(name.startsWith('humoCard')){
-        humoP[index] = parseFloat(document.getElementsByName(name+'/'+index)[0].value);
-      }
-
-      let clearUzk = 0; //Nurbek +94 669 6195
-
-      for (let i = 0; i < currentCashDesks.length; i++){
-        clearUzkP[i] = (onlineP[i] ? onlineP[i] : 0) +(paymeP[i] ? paymeP[i] : 0)+(humoP[i] ? humoP[i] : 0);
-        clearUzk += clearUzkP[i];
-      }
-
-      oldResult.clearUzk = clearUzk;
-
-      this.setState({
-        result: oldResult,
-        onlineP,
-        humoP,
-        paymeP,
-        clearUzkP
-      })
-      //document.getElementsByName(name)[0].value=val;
-    }
 
     return (
       <div className="col-lg-12 col-sm-12">
@@ -166,8 +106,7 @@ class Index extends Component {
           <Row className="card-header">
             <Col className="col-sm-12 col-md-4">
               <Label>Маркет</Label>
-              <h4
-                className="form-control">{currentCashDesks ? currentCashDesks.slice(0,1).magazineName : ''}</h4>
+              <h4 className="form-control">{currentCashDesks ? "currentCashDesks[0].magazineName" : ''}</h4>
             </Col>
             <Col className="col-sm-12 col-md-3">
               <Label>Ответственный</Label>
@@ -178,7 +117,7 @@ class Index extends Component {
               <h4 className="form-control ">{currentUser ? currentUser.username : ''}</h4>
             </Col>
             <Col className="col-sm-12 justify-content-end col-md-2">
-              <AvForm onValidSubmit={onHandleSubmit} defaultValue={new Date()}>
+              <AvForm onValidSubmit={this.onHandleSubmit} defaultValue={new Date()}>
                 <AvGroup>
                   <Label for="checkDate">Дата</Label>
                   <AvInput type="date" id="checkDate" name="checkDate"
@@ -193,9 +132,10 @@ class Index extends Component {
             </Col>
           </Row>
 
-          <AvForm onValidSubmit={onHandleSubmit}>
+          <AvForm onValidSubmit={this.onHandleSubmit}>
             <Row className="card-body justify-content-center">
               <Table className="table mb-0" id="sassProps" bordered hover={true}>
+
                 {/*КАССИР БЛОК - Начало*/}
                 <thead className="thead-default">
                 <tr>
@@ -213,7 +153,7 @@ class Index extends Component {
                   <th className="desc-text">Сальдо на начало</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput value={currentCashDesks ? currentCashDesks.reduce((a, b) => a+b.balanceValue, 0): 0}
+                      <AvInput value={currentCashDesks ? currentCashDesks.reduce((a, b) => a + b.balanceValue, 0) : 0}
                                className="text-right"
                                type="number"
                                id="nachSaldo"
@@ -264,7 +204,7 @@ class Index extends Component {
                                  name={`clearUzs/${i}`}
                                  placeholder="0.00"
                                  onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
+                                 onChange={this.handleChange}
                         />
                       </AvGroup>
                     </td>
@@ -295,7 +235,7 @@ class Index extends Component {
                                  name={`clearUzk/${i}`}
                                  placeholder="0.00"
                                  onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
+                                 onChange={this.handleChange}
                                  readOnly
                         />
                       </AvGroup>
@@ -303,7 +243,7 @@ class Index extends Component {
                   ) : ''}
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
+                  <th scope="row">4</th>
                   <th className="desc-text">ONLINE карта</th>
                   <td>
                     <AvGroup className="input-field">
@@ -327,14 +267,14 @@ class Index extends Component {
                                  name={`onlineCard/${i}`}
                                  placeholder="0.00"
                                  onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
+                                 onChange={this.handleChange}
                         />
                       </AvGroup>
                     </td>
                   ) : ''}
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
+                  <th scope="row">5</th>
                   <th className="desc-text">UnionPay</th>
                   <td>
                     <AvGroup className="input-field">
@@ -352,20 +292,20 @@ class Index extends Component {
                     <td key={item.id}>
                       <AvGroup className="input-field">
                         <AvInput className="text-right"
-                                 value={this.state.paymeP[i]}
+                                 value={this.state.unionP[i]}
                                  type="number"
                                  id={`unionPayCard/${i}`}
                                  name={`unionPayCard/${i}`}
                                  placeholder="0.00"
                                  onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
+                                 onChange={this.handleChange}
                         />
                       </AvGroup>
                     </td>
                   ) : ''}
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
+                  <th scope="row">6</th>
                   <th className="desc-text">Humo</th>
                   <td>
                     <AvGroup className="input-field">
@@ -389,38 +329,7 @@ class Index extends Component {
                                  name={`humoCard/${i}`}
                                  placeholder="0.00"
                                  onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
-                        />
-                      </AvGroup>
-                    </td>
-                  ) : ''}
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <th className="desc-text">Накоп.сдачи/недоздача</th>
-                  <td>
-                    <AvGroup className="input-field">
-                      <AvInput className="text-right"
-                               value={this.state.result.totalFail}
-                               type="number"
-                               id="totalFail"
-                               name="totalFail"
-                               placeholder="0.00"
-                               readOnly
-                      />
-                    </AvGroup>
-                  </td>
-                  {currentCashDesks ? currentCashDesks.map((item, i) =>
-                    <td key={item.id}>
-                      <AvGroup className="input-field">
-                        <AvInput className="text-right"
-                                 type="number"
-                                 id={`totalFail/${i}`}
-                                 name={`totalFail/${i}`}
-                                 placeholder="0.00"
-                                 onBlur={this.onBlurHandler}
-                                 onChange={onChangeFields}
-                                 readOnly
+                                 onChange={this.handleChange}
                         />
                       </AvGroup>
                     </td>
@@ -436,7 +345,7 @@ class Index extends Component {
                   <th width="200px" className="headTitle">ARTIX</th>
                   <th width="170px">Итоги</th>
                   {currentCashDesks ? currentCashDesks.map(item =>
-                    <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
+                    <th key={item.id} width="15%">{item.name.slice(0, 7)}</th>
                   ) : ''}
                 </tr>
                 </thead>
@@ -446,35 +355,93 @@ class Index extends Component {
                   <th className="desc-text">ARTIX UZS</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={this.state.result.artixUzs}
+                               type="number"
+                               id="artixUzs"
+                               name="artixUzs"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={0.00}
+                                 type="number"
+                                 id={`artixUzs/${i}`}
+                                 name={`artixUzs/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">2</th>
                   <th className="desc-text">ARTIX UZK</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={this.state.result.artixUzk}
+                               type="number"
+                               id="artixUzk"
+                               name="artixUzk"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={0.00}
+                                 type="number"
+                                 id={`artixUzk/${i}`}
+                                 name={`artixUzk/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <th className="desc-text">Расход UZS (возврат)</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={this.state.result.artixReturn}
+                               type="number"
+                               id="artixReturn"
+                               name="artixReturn"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={0.00}
+                                 type="number"
+                                 id={`artixReturn/${i}`}
+                                 name={`artixReturn/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 </tbody>
                 {/*ARTIX БЛОК - Конец*/}
@@ -485,59 +452,170 @@ class Index extends Component {
                   <th width="5px">#</th>
                   <th width="200px" className="headTitle">СВЕРКА</th>
                   <th width="170px">Итоги</th>
-
                   {currentCashDesks ? currentCashDesks.map(item =>
-                    <th key={item.id} width="15%">{item.name.slice(0, 14)}</th>
+                    <th key={item.id} width="15%">{item.name.slice(0, 7)}</th>
                   ) : ''}
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <th className="desc-text">Разница - UZS</th>
+                  <th className="desc-text">Накоп.сдачи/недоздача</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={this.state.result.accumFail}
+                               type="number"
+                               id="accumFail"
+                               name="accumFail"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 type="number"
+                                 id={`accumFail/${i}`}
+                                 name={`accumFail/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                                 readOnly
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
                   <th scope="row">2</th>
+                  <th className="desc-text">Разница - UZS</th>
+                  <td>
+                    <AvGroup className="input-field">
+                      <AvInput className="text-right"
+                               value={''}
+                               type="number"
+                               id="differUzs"
+                               name="differUzs"
+                               placeholder="0.00"
+                               readOnly
+                      />
+                    </AvGroup>
+                  </td>
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={''}
+                                 type="number"
+                                 id={`differUzs/${i}`}
+                                 name={`differUzs/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                                 readOnly
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
                   <th className="desc-text">Разница - UZK</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={''}
+                               type="number"
+                               id="differUzk"
+                               name="differUzk"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={''}
+                                 type="number"
+                                 id={`differUzk/${i}`}
+                                 name={`differUzk/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                                 readOnly
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
+                  <th scope="row">4</th>
                   <th className="desc-text">ИНКАССА</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right font-weight-bolder bg-info"
+                               value={''}
+                               type="number"
+                               id="collectMoney"
+                               name="collectMoney"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
-
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={''}
+                                 type="number"
+                                 id={`collectMoney/${i}`}
+                                 name={`collectMoney/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                                 readOnly
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
+                  <th scope="row">5</th>
                   <th className="desc-text">Сальдо на конец</th>
                   <td>
                     <AvGroup className="input-field">
-                      <AvInput className="text-right" type="number" validate={validateProps} id="externalCode"
-                               name="externalCode"
-                               placeholder="0.00"/>
+                      <AvInput className="text-right"
+                               value={''}
+                               type="number"
+                               id="artixReturn"
+                               name="artixReturn"
+                               placeholder="0.00"
+                               readOnly
+                      />
                     </AvGroup>
                   </td>
+                  {currentCashDesks ? currentCashDesks.map((item, i) =>
+                    <td key={item.id}>
+                      <AvGroup className="input-field">
+                        <AvInput className="text-right"
+                                 value={''}
+                                 type="number"
+                                 id={`artixReturn/${i}`}
+                                 name={`artixReturn/${i}`}
+                                 placeholder="0.00"
+                                 onBlur={this.onBlurHandler}
+                                 onChange={this.handleChange}
+                                 readOnly
+                        />
+                      </AvGroup>
+                    </td>
+                  ) : ''}
                 </tr>
                 </tbody>
                 {/*БЛОК СВЕРКА - Конец*/}
